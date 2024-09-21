@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`overflow-x-hidden ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-        <main className="h-[calc(100vh-64px)]">{children}</main>
+        <main className="h-screen min-h-screen">{children}</main>
         <Footer />
       </body>
     </html>
