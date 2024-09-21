@@ -32,7 +32,7 @@ export default function RootLayout({
       >
         <Navbar />
         <main className="h-screen min-h-screen">{children}</main>
-        <Footer />
+       
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 export default function Header() {
     return (
-        <div className='flex justify-center items-center relative h-full z-5'>
-            <video className="absolute z-1 w-full h-auto" src="./Videos/fondo.webm" autoPlay muted loop></video>
+        <div className='flex justify-center items-center relative h-full w-full z-5'>
+            <video className="absolute z-1 w-full h-auto bg-cover" src="./Videos/fondo.webm" autoPlay muted loop></video>
             <div className='flex flex-col z-10  relative gap-3'>
                 <header className="flex flex-col justify-center m-0 p-0">
                     <h1 className='text-2xl  text-al text-center tracking-wider m-0 p-0'><span className="text-3xl font-bold">Bienal </span> Chaco 2024</h1>
