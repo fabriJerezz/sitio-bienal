@@ -28,11 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`overflow-x-hidden ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`overflow-x-hidden flex flex-col min-h-screen ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-        <main className="h-screen min-h-screen">{children}</main>
-       
+        <main className="flex-grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );

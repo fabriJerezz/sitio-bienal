@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import esc from './CardInfo/Venus_of_Arles_Louvre_Ma439_n08.webp'
-import { Oswald } from 'next/font/google'
-const inter = Oswald({ subsets: ['latin'] })
+
 
 interface CardInfoProps {
   pais: string;
