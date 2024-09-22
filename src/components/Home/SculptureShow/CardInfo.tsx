@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import esc from './CardInfo/Venus_of_Arles_Louvre_Ma439_n08.webp'
+import esc from './public/Venus_of_Arles_Louvre_Ma439_n08.webp'
 
 
 interface CardInfoProps {
@@ -13,7 +13,7 @@ interface CardInfoProps {
 
 export default function CardInfo({pais, años,nombre,img,art,tec}: CardInfoProps) {
   return (
-    <div className='flex w-80  bg-primary z-3 flex-col items-center relative rounded-lg border-secondary border p-2'>
+     <div className='flex w-80 bg-primary z-3 flex-col items-center relative rounded-lg border-secondary border p-2 transform transition-transform hover:scale-105 cursor-pointer'>
         <header className='relative'>
             <h1 className="relative text-xl tracking-widest text-secondary font-bold m-2">Nombre</h1>
         </header>
