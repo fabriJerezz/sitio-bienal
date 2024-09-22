@@ -61,7 +61,7 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({ handleClick,historia,pais,nombr
                                     <h1 className='font-extrabold text-3xl tracking-widest'>Esculturas</h1>
                                 </div>
                             </header>
-                            <div className='flex w-full h-full'>
+                            <div className='flex w-full h-full pt-4 pb-0 m-0'>
                                 <div className=' relative w-1/2 h-full p-2'>
                                     <ul className='text-2xl flex flex-col  w-full gap-2 '>
                                             <li >Pais: <span className='font-bold'>{pais}</span></li>
@@ -82,8 +82,7 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({ handleClick,historia,pais,nombr
                                             <p className='text-center font-semibold mt-2'>" {sculture.frase} "</p>
                                             </>
                                         ))}
-                                    </Slider>
-                                  
+                                    </Slider>  
                                 </div>
                             </div>
                     </div>
