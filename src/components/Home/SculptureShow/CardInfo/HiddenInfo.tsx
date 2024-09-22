@@ -21,9 +21,8 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({ handleClick }) => {
     }, []);
 
     return ( 
-            <div ref={ref} className='bg-red-500 w-screen h-screen absolute z-50 top-0 left-0 bottom-0 right-0 flex justify-center items-center'>
-                    <div className='bg-green-500  relative w-1/2 h-1/2 flex flex-col items-center justify-center border-b p-0'>
-
+            <div  className=' w-screen h-screen absolute z-50 top-0 left-0 bottom-0 right-0 flex justify-center items-center' style={{backdropFilter: 'blur(5px)'}}>
+                    <div ref={ref} className='bg-green-500  relative w-1/2 h-1/2 flex flex-col items-center justify-center border-b p-0'>
                             <div>
                                 <ul className='text-sm flex flex-col m-1  w-full gap-1'>
                                         <li >Pais: <span>Francia</span></li>

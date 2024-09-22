@@ -22,7 +22,7 @@ export default function CardInfo({pais,nombre,img}: CardInfoProps) {
     }
   return (
     <>
-        <div onClick={handleClick} className='flex w-80 bg-primary z-3 flex-col relative rounded-lg border-secondary border p-2 transform transition-transform hover:scale-105 cursor-pointer'>
+        <div onClick={handleClick} className='flex w-64 bg-primary z-3 flex-col relative rounded-lg border-secondary border p-2 transform transition-transform hover:scale-105 cursor-pointer'>
             <header className='relative  mb-2'>
                 <h1 className="relative text-3xl tracking-widest text-secondary font-bold">Nombre</h1>
                 <h2 className='relative text-xl ml-3 italic'>Buenos Aires</h2>
