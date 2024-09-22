@@ -15,7 +15,7 @@ export default function CardInfo({pais, años,nombre,img,art,tec}: CardInfoProps
   return (
     <div className='flex w-80  bg-primary z-3 flex-col items-center relative rounded-lg border-secondary border p-2'>
         <header className='relative'>
-            <h1 className="relative text-xl tracking-widest text-secondary">Nombre</h1>
+            <h1 className="relative text-xl tracking-widest text-secondary font-bold m-2">Nombre</h1>
         </header>
         <div className='relative w-full h-full'>
             <Image alt="Descripción de la imagen" src={esc} className='w-full h-full'></Image>

@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../components/Home/Header';
-import Slider from '../components/Home/Slider';
+import SculptureShow from '../components/Home/SculptorShow';
 
 export default function Home() {
   return (
     <>
     <Header/>
-    <Slider />
+    <SculptureShow />
     </>
   );
 }

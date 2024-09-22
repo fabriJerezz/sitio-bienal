@@ -9,12 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-  			primary: '#3A5F73',
+        primary: '#3A5F73',
         secondary: "#F0F0F0",
         text: "#4A4A4A",
       },
+      transitionProperty: { // Añade esto
+        'height': 'height',
+        'spacing': 'margin, padding',
+      }
+    },
+  },
+  variants: { // Añade esto
+    extend: {
+      scale: ['hover', 'focus'],
     },
   },
   plugins: [],
 };
+
 export default config;
