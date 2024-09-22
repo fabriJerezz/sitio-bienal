@@ -11,10 +11,11 @@ interface CardInfoProps {
   pais: string;
   nombre: string;
   img: string;
-  
+  mov:string;
+  historia:string;
 }
 
-export default function CardInfo({pais,nombre,img}: CardInfoProps) {
+export default function CardInfo({pais,nombre,img,mov,historia}: CardInfoProps) {
     const [showHidden, setShowHidden] = useState(false);
 
     const handleClick = () => {
@@ -32,7 +33,7 @@ export default function CardInfo({pais,nombre,img}: CardInfoProps) {
             </div>
             <button className='mt-5 relative bg-secundary border-secondary border pr-10 pl-10 pt-1 pb-1 rounded-lg text-xl  '>Votar</button>
         </div>
-       {showHidden && <HiddenInfo handleClick={handleClick} />}
+       {showHidden && <HiddenInfo handleClick={handleClick} nombre={nombre} movimiento={mov} historia={historia} pais={pais}/>}
     </>
     
   )
