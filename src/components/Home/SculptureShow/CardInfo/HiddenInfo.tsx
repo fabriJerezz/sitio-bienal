@@ -71,11 +71,11 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({ handleClick,historia }) => {
                                     <video className='rounded-lg mt-2 mb-2' muted loop autoPlay src="../../Videos/fondo.webm"></video>
                                     <p className='text-center font-bold text-lg'>historia</p>
                                 </div>
-                                <div className='bg-red-500  relative w-1/2 h-full'>
+                                <div className='bg-red-500 relative w-1/2 h-full'>
                                     <Slider {...settings}>
                                         {allScultures.map((sculture) => (
-                                            <div key={sculture.id}>
-                                                <Image src={sculture.img} alt={sculture.nombre} className='w-1/2 h-1/2' />
+                                            <div key={sculture.id} className='flex justify-center items-center bg-black w-full h-full'>
+                                                <Image src={sculture.img} alt={sculture.nombre} className='w-1/2 h-1/2 mx-auto' />
                                             </div>
                                         ))}
                                     </Slider>
