@@ -8,12 +8,12 @@ export default function Slider() {
             <h1 className="relative p-0 m-0 text-6xl">Nuestros <span className="font-bold">Escultores</span></h1>
         </header>
         <div className="grid grid-cols-6 gap-10">
-          <CardInfo />
-          <CardInfo />
-          <CardInfo />
-          <CardInfo />
-           <CardInfo />
-          <CardInfo />
+          <CardInfo nombre='Juan' provincia='Buenos Aires'/>
+          <CardInfo nombre='Agusto' provincia='Chaco'/>
+          <CardInfo nombre='Agustin' provincia='Jujuy'/>
+          <CardInfo nombre='Enzo' provincia='Chaco'/>
+           <CardInfo nombre='Feli' provincia="Corrientes"/>
+          <CardInfo  nombre='Fabricio' provincia="Chaco"/>
         </div>
       </section>
     </>
