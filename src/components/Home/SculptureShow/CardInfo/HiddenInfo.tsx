@@ -1,5 +1,10 @@
 "use client";
 import React, { useEffect, useRef,useState } from 'react'
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+import venusImage from '../public/Venus_of_Arles_Louvre_Ma439_n08.webp'
+import Image from 'next/image';
 
 interface HiddenInfoProps {
     handleClick: () => void;
@@ -13,8 +18,17 @@ interface HiddenInfoProps {
 const HiddenInfo: React.FC<HiddenInfoProps> = ({ handleClick,historia }) => {
     const ref = useRef<HTMLDivElement>(null);
 
+     const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
+
     const allScultures = [
-        {id:1,img:'../../public/Venus_of_Arles_Louvre_Ma439_n08.webp',nombre:'Venus de Arles',pais:'Francia',años:1000,movimiento:'Renacimiento'},
+        {id:1,img:venusImage,nombre:'Venus de Arles',pais:'Francia',años:1000,movimiento:'Renacimiento'},
+         {id:2,img:venusImage,nombre:'Venus de Arles',pais:'Francia',años:1000,movimiento:'Renacimiento'}
     ]
 
     const [scultures, setScultures] = useState([])
@@ -40,10 +54,10 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({ handleClick,historia }) => {
                     <div ref={ref} className='bg-green-500  relative w-3/4 h-3/4 flex  flex-col items-center justify-between border-b p-0'>
                             <header className='flex w-full bg-red-450 justify-between'>
                                 <div className='bg-slate-400 w-1/2'>
-                                    <h1 className='font-extrabold text-3xl'>Nombre</h1>
+                                    <h1 className='font-extrabold text-3xl tracking-widest'>Nombre</h1>
                                 </div>
                                 <div className='bg-slate-950 w-1/2'>
-                                    <h1 className='font-extrabold text-3xl'>Esculturas</h1>
+                                    <h1 className='font-extrabold text-3xl tracking-widest'>Esculturas</h1>
                                 </div>
                             </header>
                             <div className='flex w-full h-full'>
@@ -55,10 +69,16 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({ handleClick,historia }) => {
                                             <li >Tecnica: <span className='font-bold'>Escultura en marmol</span></li>
                                     </ul>
                                     <video className='rounded-lg mt-2 mb-2' muted loop autoPlay src="../../Videos/fondo.webm"></video>
-                                    <p className='text-center font-bold text-lg'>asdadasdadas</p>
+                                    <p className='text-center font-bold text-lg'>historia</p>
                                 </div>
                                 <div className='bg-red-500  relative w-1/2 h-full'>
-                                    
+                                    <Slider {...settings}>
+                                        {allScultures.map((sculture) => (
+                                            <div key={sculture.id}>
+                                                <Image src={sculture.img} alt={sculture.nombre} className='w-1/2 h-1/2' />
+                                            </div>
+                                        ))}
+                                    </Slider>
                                 </div>
                             </div>
                     </div>
