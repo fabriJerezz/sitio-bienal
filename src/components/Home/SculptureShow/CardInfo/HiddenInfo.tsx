@@ -79,6 +79,7 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({ handleClick,historia }) => {
                                             </div>
                                         ))}
                                     </Slider>
+                                    <p className='text-center'>Frase de la escultura</p>
                                 </div>
                             </div>
                     </div>
