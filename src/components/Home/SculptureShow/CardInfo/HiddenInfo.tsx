@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef,useState } from 'react'
 
 interface HiddenInfoProps {
     handleClick: () => void;
@@ -12,6 +12,15 @@ interface HiddenInfoProps {
 
 const HiddenInfo: React.FC<HiddenInfoProps> = ({ handleClick,historia }) => {
     const ref = useRef<HTMLDivElement>(null);
+
+    const allScultures = [
+        {id:1,img:'../../public/Venus_of_Arles_Louvre_Ma439_n08.webp',nombre:'Venus de Arles',pais:'Francia',años:1000,movimiento:'Renacimiento'},
+    ]
+
+    const [scultures, setScultures] = useState([])
+
+
+    const sculturesToShow = allScultures.filter((sculture) => {sculture.id===1}) // es para probrar aca se fetchearian las esculturas de la base de datos y se mostrarian las que se las del escultor que se dio click
 
     useEffect(() => {
         function checkClick(e: MouseEvent) {
@@ -49,7 +58,7 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({ handleClick,historia }) => {
                                     <p className='text-center font-bold text-lg'>asdadasdadas</p>
                                 </div>
                                 <div className='bg-red-500  relative w-1/2 h-full'>
-                                        asdasdsa
+                                    
                                 </div>
                             </div>
                     </div>
