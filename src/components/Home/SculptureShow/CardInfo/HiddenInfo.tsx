@@ -1,29 +1,27 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
-import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import venusImage from '../public/Venus_of_Arles_Louvre_Ma439_n08.webp';
-import Image from 'next/image';
 
 interface HiddenInfoProps {
   handleClick: () => void;
-  pais: string;
-  años: number;
+  country: string;
+  age: number;
   movimiento: string;
-  nombre: string;
-  historia: string;
-  tec: string;
+  name: string;
+  history: string;
+  technique: string;
 }
 
 const HiddenInfo: React.FC<HiddenInfoProps> = ({
   handleClick,
-  historia,
-  pais,
-  nombre,
-  años,
-  movimiento,
-  tec,
+  history,
+  country,
+  name,
+  age,
+  movement,
+  technique,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -39,18 +37,18 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({
     {
       id: 1,
       img: venusImage,
-      nombre: 'Venus de Arles',
-      pais: 'Francia',
-      años: 1000,
+      name: 'Venus de Arles',
+      country: 'Francia',
+      age: 1000,
       movimiento: 'Renacimiento',
       frase: 'Una gran obra de arte',
     },
     {
       id: 2,
       img: venusImage,
-      nombre: 'Venus de Arles',
-      pais: 'Francia',
-      años: 1000,
+      name: 'Venus de Arles',
+      country: 'Francia',
+      age: 1000,
       movimiento: 'Renacimiento',
     },
   ];
@@ -81,9 +79,7 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({
       >
         <header className="flex w-full bg-red-450 justify-between border-b pt-2 pb-2">
           <div className="w-1/2">
-            <h1 className="font-extrabold text-3xl tracking-widest">
-              {nombre}
-            </h1>
+            <h1 className="font-extrabold text-3xl tracking-widest">{name}</h1>
           </div>
           <div className="w-1/2">
             <h1 className="font-extrabold text-3xl tracking-widest">
@@ -95,17 +91,17 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({
           <div className="relative w-1/2 h-full p-2">
             <ul className="text-2xl flex flex-col w-full gap-2">
               <li>
-                Pais: <span className="font-bold">{pais}</span>
+                Pais: <span className="font-bold">{country}</span>
               </li>
               <li>
-                Años: <span className="font-bold">{años}</span>
+                Años: <span className="font-bold">{age}</span>
               </li>
               <li>
                 Movimiento Artistico:{' '}
                 <span className="font-bold">{movimiento}</span>
               </li>
               <li>
-                Tecnica: <span className="font-bold">{tec}</span>
+                Tecnica: <span className="font-bold">{technique}</span>
               </li>
             </ul>
             <video
@@ -115,7 +111,7 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({
               autoPlay
               src="../../Videos/fondo.webm"
             ></video>
-            <p className="text-center font-bold text-lg">{historia}</p>
+            <p className="text-center font-bold text-lg">{history}</p>
           </div>
           <div className="relative w-1/2 h-full p-8 border-l"></div>
         </div>
