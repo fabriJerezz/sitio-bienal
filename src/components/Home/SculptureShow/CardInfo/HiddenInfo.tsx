@@ -55,7 +55,7 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({
     },
   ];
 
-  const sculturesToShow = allScultures.filter((sculture) => sculture.id === 1);
+  //const sculturesToShow = allScultures.filter((sculture) => sculture.id === 1);
 
   useEffect(() => {
     function checkClick(e: MouseEvent) {
@@ -117,27 +117,7 @@ const HiddenInfo: React.FC<HiddenInfoProps> = ({
             ></video>
             <p className="text-center font-bold text-lg">{historia}</p>
           </div>
-          <div className="relative w-1/2 h-full p-8 border-l">
-            <Slider {...settings}>
-              {sculturesToShow.map((sculture) => (
-                <div
-                  key={sculture.id}
-                  className="flex justify-center items-center bg-primary/50 w-full h-full"
-                >
-                  <Image
-                    src={sculture.img}
-                    alt={sculture.nombre}
-                    className="w-1/2 h-1/2 mx-auto"
-                  />
-                  {sculture.frase && (
-                    <p className="text-center font-semibold mt-2">
-                      {sculture.frase}{' '}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </Slider>
-          </div>
+          <div className="relative w-1/2 h-full p-8 border-l"></div>
         </div>
       </div>
     </div>
