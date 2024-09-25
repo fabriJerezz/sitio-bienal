@@ -28,6 +28,7 @@ export default function CardInfo({
   const handleClick = () => {
     setShowHidden(!showHidden);
   };
+
   return (
     <>
       <div
