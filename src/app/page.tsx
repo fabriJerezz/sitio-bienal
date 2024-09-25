@@ -6,9 +6,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="mt-20 flex items-center justify-center">
-        <SculptorShow />
-      </div>
+      <SculptorShow />
     </>
   );
 }
