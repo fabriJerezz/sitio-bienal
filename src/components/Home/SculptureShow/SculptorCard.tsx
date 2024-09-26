@@ -56,7 +56,7 @@ export default function CardInfo({
           {name} {lastname}
         </h2>
         <div className="flex justify-end m-0 p-0">
-          <button className="text-white p-1 rounded-lg text-2xl border inline-block m-0  font-bold pl-2 pr-2">
+          <button className="text-white p-1 rounded-lg text-2xl border inline-block m-0  font-bold pl-2 pr-2 hover:bg-white/20 transition-all duration-75 ease-in-out">
             Votar
           </button>
         </div>
