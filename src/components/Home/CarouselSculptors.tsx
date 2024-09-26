@@ -61,13 +61,14 @@ export function CarouselSculptors() {
                 <CardContent className="flex flex-col items-center justify-center p-6">
                   <CardInfo
                     key={index}
-                    country={sculptor.pais}
+                    country={sculptor.nacionalidad}
                     name={sculptor.nombre}
                     img={sculptor.imagen}
                     mov={sculptor.movimiento}
                     history={sculptor.historia}
                     province={sculptor.nacionalidad}
                     technique={sculptor.tecnica}
+                    lastname={sculptor.apellido}
                   />
                 </CardContent>
               </Card>

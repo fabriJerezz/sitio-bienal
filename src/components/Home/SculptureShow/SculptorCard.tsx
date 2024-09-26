@@ -1,8 +1,9 @@
 'use client';
 import React from 'react';
-import { useState } from 'react';
+
 import Image from 'next/image';
 import esc from '../../../../public/imgs/esc1.jpg';
+import { getCountryCode } from '../../lib/getCountryCode';
 
 interface CardInfoProps {
   country: string;
@@ -12,6 +13,7 @@ interface CardInfoProps {
   history: string;
   province: string;
   technique: string;
+  lastname: string;
 }
 
 export default function CardInfo({
@@ -22,35 +24,42 @@ export default function CardInfo({
   history,
   province,
   technique,
+  lastname,
 }: CardInfoProps) {
-  const [showHidden, setShowHidden] = useState(false);
+  // const [showHidden, setShowHidden] = useState(false);
 
-  const handleClick = () => {
-    setShowHidden(!showHidden);
-  };
+  // const handleClick = () => {
+  //   setShowHidden(!showHidden);
+  // };
 
   return (
     <>
       <div
-        onClick={handleClick}
-        className="flex w-90 bg-black z-3 flex-col relative rounded-lg border-secondary  p-2 transform transition-transform hover:scale-105 cursor-pointer text-white"
+        // onClick={handleClick}
+        className="flex w-90 bg-black z-3 flex-col relative rounded-lg border-secondary    text-white"
       >
-        <header className="relative  mb-2">
-          <h1 className="relative text-3xl tracking-widest text-secondary font-bold">
-            {name}
-          </h1>
-          <h2 className="relative text-xl ml-3 italic">{province}</h2>
-        </header>
         <div className="relative w-full h-full">
           <Image
             alt="Descripción de la imagen"
             src={esc}
-            className="w-full h-full rounded-xl"
+            className="w-full h-full rounded-xl transform transition-transform hover:scale-105 cursor-pointer"
           ></Image>
         </div>
-        <button className="mt-5 relative bg-secundary border-secondary border pr-10 pl-10 pt-1 pb-1 rounded-lg text-xl  ">
-          Votar
-        </button>
+        <h2 className="text-3xl font-bold  text-white mt-2 relative">
+          <Image
+            alt="Country flag"
+            src={`https://flagcdn.com/${getCountryCode(country)}.svg`}
+            width={80}
+            height={80}
+            className="absolute  right-8 bottom-3 "
+          ></Image>
+          {name} {lastname}
+        </h2>
+        <div className="flex justify-end m-0 p-0">
+          <button className="text-white p-1 rounded-lg text-2xl border inline-block m-0  font-bold pl-2 pr-2">
+            Votar
+          </button>
+        </div>
       </div>
     </>
   );
