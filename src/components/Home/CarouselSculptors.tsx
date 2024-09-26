@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from './ui/carousel';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import CardInfo from './SculptureShow/SculptorCard';
 
 const fetchSculptors = async () => {
