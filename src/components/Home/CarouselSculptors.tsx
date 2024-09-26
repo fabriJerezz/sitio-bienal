@@ -44,8 +44,6 @@ export function CarouselSculptors() {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4">
-      {' '}
-      {/* Aumentado el ancho máximo */}
       <Carousel
         opts={{
           align: 'start',
