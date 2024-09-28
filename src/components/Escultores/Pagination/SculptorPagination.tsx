@@ -6,10 +6,13 @@ function SculptorPagination({
 }: {
   searchParams?: { page?: string; query?: string };
 }) {
+  // Obtiene la página actual desde los parámetros de búsqueda o usa 1 como valor predeterminado
   const currentPage = Number(searchParams?.page) || 1;
 
-  const totalPages = 10;
+  // Número total de páginas (esto podría venir de una API o cálculo basado en datos reales)
+  const totalPages = 4;
 
+  // Array de entradas de ejemplo (en una aplicación real, esto vendría de una base de datos o API)
   const entries = [
     'entry1',
     'entry2',
@@ -23,10 +26,11 @@ function SculptorPagination({
     'entry10',
   ];
 
-  // Calculate the start and end index for the current page
-  const entriesPerPage = 3; // Adjust this number as needed
+  // Calcula el índice de inicio y fin para la página actual
+  const entriesPerPage = 3; // Ajusta este número según sea necesario
   const startIndex = (currentPage - 1) * entriesPerPage;
   const endIndex = startIndex + entriesPerPage;
+  // Obtiene las entradas para la página actual
   const currentEntries = entries.slice(startIndex, endIndex);
 
   return (
