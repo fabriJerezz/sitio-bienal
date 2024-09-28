@@ -65,7 +65,7 @@ function SculptorList() {
               </label>
             </div>
           </div>
-          <button className="bg-purple-900 text-white hover:bg-purple-800 transition-all duration-300 rounded-full p-3 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transform hover:-translate-y-1 active:translate-y-0">
+          <button className=" bg-purple-900 text-white hover:bg-purple-800 transition-all duration-300 rounded-full p-2 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transform hover:-translate-y-1 active:translate-y-0">
             Aplicar
           </button>
         </div>
