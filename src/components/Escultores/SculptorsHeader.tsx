@@ -2,25 +2,26 @@ import React from 'react';
 
 function SculptorsHeader() {
   return (
-    <div className="relative flex flex-col gap-4 bg-red-500  pt-28">
-      <h1 className="text-4xl font-bold text-left pl-28 bg-blue-500 mb-4">
-        Escultores
+    <div className="relative flex flex-col gap-4  bg-black pt-28">
+      <h1 className="text-4xl font-bold text-left  pl-10 mb-4 text-white">
+        Escultores |
       </h1>
-      <div className="flex justify-between items-center px-12 bg-green-500 p-4">
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
-          Explorar Escultor
-        </button>
+      <div className="flex justify-between items-center px-12  p-4">
         <div className="flex gap-4">
-          <div className="flex justify-center items-center ">
-            <input type="text" placeholder="Buscar escultor" />
-            <button className="bg-blue-500 text-white  rounded-md">
+          <div className="flex justify-center items-center gap-2">
+            <input
+              className="bg-white text-black py-2 px-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 placeholder-gray-400 text-sm"
+              type="text"
+              placeholder="Buscar escultor"
+            />
+            <button className=" text-white  rounded-md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                className="size-8"
+                className="size-9"
               >
                 <path
                   stroke-linecap="round"
@@ -30,14 +31,14 @@ function SculptorsHeader() {
               </svg>
             </button>
           </div>
-          <button className="bg-blue-500 text-white  rounded-md">
+          <button className=" text-white  rounded-md group">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="white"
+              fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              className="size-8"
+              className="size-9 group-hover:text-red-500 transition-colors duration-300"
             >
               <path
                 stroke-linecap="round"
@@ -47,6 +48,9 @@ function SculptorsHeader() {
             </svg>
           </button>
         </div>
+        <button className="text-white px-6 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-semibold text-lg">
+          Explorar Escultor
+        </button>
       </div>
     </div>
   );
