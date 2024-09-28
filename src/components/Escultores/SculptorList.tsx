@@ -1,12 +1,21 @@
+// ... existing code ...
 'use client';
-import React, { useState } from 'react';
 
-function SculptorList() {
+import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+
+import SculptorPagination from './Pagination/SculptorPagination';
+
+export default function SculptorList() {
   const [displayFilter, setDisplayFilter] = useState(false);
 
   const handleDisplayFilter = () => {
     setDisplayFilter(!displayFilter);
   };
+
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page') || 1;
+  const query = searchParams.get('query') || '';
 
   return (
     <div className="w-screen h-screen bg-red-500 flex flex-col  py-2 items-center">
@@ -70,16 +79,9 @@ function SculptorList() {
           </button>
         </div>
       </div>
-      <div className="w-3/4 h-screen bg-blue-500 mt-1  grid grid-cols-3 gap-4 p-2">
-        <div className="bg-green-500 w-full h-full rounded-lg"></div>
-        <div className="bg-green-500 w-full h-full rounded-lg"></div>
-        <div className="bg-green-500 w-full h-full rounded-lg"></div>
-        <div className="bg-green-500 w-full h-full rounded-lg"></div>
-        <div className="bg-green-500 w-full h-full rounded-lg"></div>
-        <div className="bg-green-500 w-full h-full rounded-lg"></div>
-      </div>
+      <SculptorPagination
+        searchParams={{ page: page.toString(), query: query }}
+      />
     </div>
   );
 }
-
-export default SculptorList;
