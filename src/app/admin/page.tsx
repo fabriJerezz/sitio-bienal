@@ -1,5 +1,6 @@
+'use client'
 import React from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useUserStore } from '@/store/userStore';
 import { useEffect } from 'react';
 
@@ -8,10 +9,10 @@ const Admin = () => {
   const router = useRouter();
 
   useEffect(() : void => {
-    if (user?.rol !== 'staff') {
+    if (user?.role !== 'STAFF') {
         router.push('/unauthorized');
     }
-  }, [user, router]);
+  }, []);
 
   return (
     <div>

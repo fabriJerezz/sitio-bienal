@@ -1,7 +1,22 @@
-
+import { useUserStore } from "@/store/userStore";
+import { useEffect } from "react";
 
 export default function Header() {
+  const user = useUserStore((state) => state.user);
+  const login = useUserStore((state) => state.login);
+  const logout = useUserStore((state) => state.logout);
 
+
+  const newUser = {
+    username: "fabri",
+    password: "elfrontend12",
+  };
+
+  useEffect(() => {
+    login(newUser);
+  }, []);
+
+  console.log(user);
   return (
     <div className="flex justify-center items-center relative h-screen w-screen z-5 text-white">
       <video
@@ -20,7 +35,6 @@ export default function Header() {
             Donde el arte toma forma
           </h2>
         </header>
-
         <div className="flex gap-10 justify-center items-center text-xl">
           <button className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300">
             Explorar obras

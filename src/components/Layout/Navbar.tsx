@@ -10,15 +10,13 @@ const Navbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const user = useUserStore.getState().user;
-  const isAdmin = useMemo(() => user?.rol === 'staff', [user]);
+  const isAdmin = useMemo(() => user?.role === 'STAFF', [user]);
 
   const controlNavbar = (): void => {
     if (typeof window !== 'undefined') {
       if (window.scrollY > lastScrollY) {
-        // if scroll down hide the navbar
         setShowNavbar(false);
       } else {
-        // if scroll up show the navbar
         setShowNavbar(true);
       }
       setLastScrollY(window.scrollY);
@@ -33,7 +31,7 @@ const Navbar = () => {
         window.removeEventListener('scroll', controlNavbar);
       };
     }
-  }, [lastScrollY]);
+  }, []);
   return (
     <div
       className={`text-secondary w-screen z-50 flex items-center fixed py-3 transition-transform duration-300 ${
@@ -41,14 +39,11 @@ const Navbar = () => {
       }`}
     >
       <div className="flex items-center justify-between w-[90%] mx-auto">
-        <div className="text-2xl font-bold">Sitio Bienal</div>
+        <Link href="/" className="text-2xl font-bold">Sitio Bienal</Link>
         <div className="flex items-center gap-4">
           {isAdmin && 
             <Link href="/admin">admin</Link>
           }
-          <Link href="/">Inicio</Link>
-          <Link href="/">Sobre nosotros</Link>
-          <Link href="/">Contacto</Link>
         </div>
       </div>
     </div>

@@ -5,8 +5,7 @@ const Unauthorized = () => {
     <div>
         <h1>Unauthorized</h1>
         <p>No tienes permisos para acceder a esta página</p>
-        <Link href="/home">Ir a inicio</Link>
-        <Link href="/login">Autenticarse</Link>
+        <Link href="/">Ir a inicio</Link>
     </div>
   )
 }
