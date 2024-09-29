@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-
+import Image from 'next/image';
 interface Escultor {
   id: number;
   nombre: string;
@@ -72,6 +72,16 @@ const EscultoresList = () => {
             key={escultor.id}
             className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-300"
           >
+            <Image
+              src={
+                `https://res.cloudinary.com/dq1vfo4c8/${escultor.foto_perfil}` ||
+                'https://via.placeholder.com/150'
+              }
+              alt={escultor.nombre}
+              width={100}
+              height={100}
+              className="w-full h-40 object-cover rounded-md"
+            />
             <h2 className="text-xl font-semibold text-gray-700">
               {escultor.nombre} {escultor.apellido}
             </h2>
