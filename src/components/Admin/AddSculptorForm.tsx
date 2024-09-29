@@ -47,8 +47,13 @@ const AddSculptorForm = () => {
     Object.entries(formData).forEach(([key, value]) => {
       // Itera sobre cada par clave-valor en el objeto formData
       if (value !== null) {
-        // Si el valor no es null, lo añade al objeto FormData
-        data.append(key, value.toString()); // Añade el valor al objeto FormData como una cadena
+        if (key === 'foto_perfil' && value instanceof File) {
+          // Si es la foto de perfil y es un archivo, lo añadimos directamente
+          data.append(key, value);
+        } else {
+          // Para los demás campos, los añadimos como cadenas
+          data.append(key, value.toString());
+        }
       }
     });
 
@@ -67,8 +72,17 @@ const AddSculptorForm = () => {
       if (response.ok) {
         console.log('Escultor añadido correctamente');
         // Aquí podrías resetear el formulario o redirigir al usuario
+        setFormData({
+          nombre: '',
+          apellido: '',
+          fecha_nacimiento: '',
+          nacionalidad: '',
+          eventos_ganados: 0,
+          foto_perfil: null,
+        });
       } else {
-        console.log('Error al añadir escultor');
+        const errorData = await response.json();
+        console.log('Error al añadir escultor:', errorData);
       }
     } catch (error) {
       console.error('Error al enviar el formulario', error);
@@ -79,6 +93,7 @@ const AddSculptorForm = () => {
     <form
       onSubmit={handleSubmit}
       className="flex flex-col space-y-4 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md"
+      encType="multipart/form-data"
     >
       <input
         name="nombre"
