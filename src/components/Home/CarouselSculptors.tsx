@@ -26,7 +26,9 @@ const fetchSculptors = async () => {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    return data.results; // Accedemos al array 'results' del JSON
+
+    return data.results;
+
   } catch (error) {
     console.error('Failed to fetch sculptors:', error);
     return [];
