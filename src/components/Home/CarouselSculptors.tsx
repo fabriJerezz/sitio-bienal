@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from './ui/carousel';
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import CardInfo from './SculptureShow/SculptorCard';
 
 const fetchSculptors = async () => {
@@ -26,7 +26,7 @@ const fetchSculptors = async () => {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    return data;
+    return data.results; // Accedemos al array 'results' del JSON
   } catch (error) {
     console.error('Failed to fetch sculptors:', error);
     return [];
@@ -54,13 +54,13 @@ export function CarouselSculptors() {
         <CarouselContent className="-ml-2 md:-ml-4">
           {sculptors.map((sculptor, index) => (
             <CarouselItem
-              key={index}
+              key={sculptor.id}
               className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
             >
               <Card className="border border-gray-200">
                 <CardContent className="flex flex-col items-center justify-center p-6">
                   <CardInfo
-                    key={index}
+                    key={sculptor.id}
                     country={sculptor.nacionalidad}
                     name={sculptor.nombre}
                     img={sculptor.imagen}
