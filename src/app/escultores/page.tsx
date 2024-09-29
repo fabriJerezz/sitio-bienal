@@ -1,11 +1,11 @@
 import React from 'react';
 import SculptorsHeader from '../../components/Escultores/SculptorsHeader';
-import SculptorList from '../../components/Escultores/SculptorList';
+import PaginationSculptors from '../../components/Escultores/Pagination/PaginationSculptors';
 function page() {
   return (
     <>
       <SculptorsHeader />
-      <SculptorList />
+      <PaginationSculptors />
     </>
   );
 }
