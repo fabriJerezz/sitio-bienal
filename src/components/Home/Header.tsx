@@ -1,15 +1,15 @@
-import { useUserStore } from "@/store/userStore";
-import { useEffect } from "react";
+import { useUserStore } from '@/store/userStore';
+import { useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Header() {
   const user = useUserStore((state) => state.user);
   const login = useUserStore((state) => state.login);
   const logout = useUserStore((state) => state.logout);
 
-
   const newUser = {
-    username: "fabri",
-    password: "elfrontend12",
+    username: 'fabri',
+    password: 'elfrontend12',
   };
 
   useEffect(() => {
@@ -39,15 +39,17 @@ export default function Header() {
           <button className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300">
             Explorar obras
           </button>
-          <button className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300">
+          <Link
+            href="/escultores"
+            className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300"
+          >
             Conoce a los Escultores
-          </button>
+          </Link>
           <button className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300">
             Proximos Eventos
           </button>
         </div>
       </div>
     </div>
-
   );
 }
