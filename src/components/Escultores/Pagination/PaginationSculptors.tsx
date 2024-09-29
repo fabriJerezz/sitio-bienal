@@ -62,15 +62,12 @@ const EscultoresList = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        Escultores
-      </h1>
+    <div className="container mx-auto px-4 py-8  w-full">
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {escultores.map((escultor) => (
           <li
             key={escultor.id}
-            className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-300"
+            className="bg-[#131313] shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow duration-300 border-2 border-[#8B5CF6]"
           >
             <Image
               src={
@@ -82,10 +79,10 @@ const EscultoresList = () => {
               height={100}
               className="w-full h-40 object-cover rounded-md"
             />
-            <h2 className="text-xl font-semibold text-gray-700">
+            <h2 className="text-xl font-semibold text-[#FFFFFF] mt-4">
               {escultor.nombre} {escultor.apellido}
             </h2>
-            <p className="text-gray-600 mt-2">{escultor.nacionalidad}</p>
+            <p className="text-[#B8B8B8] mt-2">{escultor.nacionalidad}</p>
           </li>
         ))}
       </ul>
@@ -93,14 +90,14 @@ const EscultoresList = () => {
         <button
           onClick={handlePrevPage}
           disabled={!prevPage}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
+          className="px-4 py-2 bg-[#8B5CF6] text-white rounded-md hover:bg-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
         >
           Anterior
         </button>
         <button
           onClick={handleNextPage}
           disabled={!nextPage}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
+          className="px-4 py-2 bg-[#8B5CF6] text-white rounded-md hover:bg-[#7C3AED] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
         >
           Siguiente
         </button>
