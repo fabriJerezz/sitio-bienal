@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useUserStore } from '@/store/userStore';
-import Modal from 'react-modal'; // Asegúrate de tener react-modal instalado
 import EditSculptorModal from './EditSculptorModal';
 
 export interface Escultor {

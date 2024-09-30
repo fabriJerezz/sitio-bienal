@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import { Escultor } from './SculptorsList'; // Asegúrate de exportar la interfaz Escultor desde SculptorsList
+import { Escultor } from './SculptorsList';
 
 interface EditSculptorModalProps {
   escultor: Escultor | null;
@@ -32,60 +32,87 @@ const EditSculptorModal: React.FC<EditSculptorModalProps> = ({
       isOpen={!!escultor}
       onRequestClose={onClose}
       contentLabel="Editar Escultor"
+      className="fixed inset-0 flex items-center justify-center"
+      overlayClassName="fixed inset-0 bg-black bg-opacity-50"
     >
-      <h2>Editar Escultor</h2>
-      {editingSculptor && (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSave();
-          }}
-        >
-          <label>
-            Nombre:
-            <input
-              type="text"
-              value={editingSculptor.nombre}
-              onChange={(e) =>
-                setEditingSculptor({
-                  ...editingSculptor,
-                  nombre: e.target.value,
-                })
-              }
-            />
-          </label>
-          <label>
-            Apellido:
-            <input
-              type="text"
-              value={editingSculptor.apellido}
-              onChange={(e) =>
-                setEditingSculptor({
-                  ...editingSculptor,
-                  apellido: e.target.value,
-                })
-              }
-            />
-          </label>
-          <label>
-            Nacionalidad:
-            <input
-              type="text"
-              value={editingSculptor.nacionalidad}
-              onChange={(e) =>
-                setEditingSculptor({
-                  ...editingSculptor,
-                  nacionalidad: e.target.value,
-                })
-              }
-            />
-          </label>
-          <button type="submit">Guardar</button>
-          <button type="button" onClick={onClose}>
-            Cancelar
-          </button>
-        </form>
-      )}
+      <div className="bg-white rounded-lg p-8 max-w-md w-full">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">
+          Editar Escultor
+        </h2>
+        {editingSculptor && (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSave();
+            }}
+            className="space-y-4"
+          >
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Nombre:
+                <input
+                  type="text"
+                  value={editingSculptor.nombre}
+                  onChange={(e) =>
+                    setEditingSculptor({
+                      ...editingSculptor,
+                      nombre: e.target.value,
+                    })
+                  }
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+              </label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Apellido:
+                <input
+                  type="text"
+                  value={editingSculptor.apellido}
+                  onChange={(e) =>
+                    setEditingSculptor({
+                      ...editingSculptor,
+                      apellido: e.target.value,
+                    })
+                  }
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+              </label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Nacionalidad:
+                <input
+                  type="text"
+                  value={editingSculptor.nacionalidad}
+                  onChange={(e) =>
+                    setEditingSculptor({
+                      ...editingSculptor,
+                      nacionalidad: e.target.value,
+                    })
+                  }
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+              </label>
+            </div>
+            <div className="flex justify-end space-x-3 mt-6">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Guardar
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
     </Modal>
   );
 };
