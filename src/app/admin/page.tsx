@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUserStore } from '@/store/userStore';
+import UserProfile from '@/components/Admin/UserProfile';
 
 const Admin = () => {
   const { user } = useUserStore();
@@ -23,7 +24,6 @@ const Admin = () => {
     }
   }, [user, router]);
 
-  console.log(profileData);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 p-6">
       <div className="bg-white shadow-lg rounded-xl p-10 max-w-lg w-full transition-all duration-300 hover:shadow-xl">
@@ -51,35 +51,11 @@ const Admin = () => {
           <div className="mt-10 text-center">
             <p className="text-sm text-indigo-600 font-medium bg-indigo-100 py-2 px-4 rounded-full inline-block">
               Conectado como:{' '}
-              <span className="font-bold">{profileData.user.username}</span>
+              <span className="font-bold">{profileData?.user.username}</span>
             </p>
           </div>
         )}
-        {profileData && (
-          <div className="mt-2 bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-2xl font-bold text-indigo-600 mb-4">Perfil</h2>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between border-b border-gray-200 pb-2">
-                <span className="text-gray-600 font-medium">Email:</span>
-                <span className="text-indigo-700">
-                  {profileData.user.email}
-                </span>
-              </div>
-              <div className="flex items-center justify-between border-b border-gray-200 pb-2">
-                <span className="text-gray-600 font-medium">Nombre:</span>
-                <span className="text-indigo-700">
-                  {profileData.user.first_name}
-                </span>
-              </div>
-              <div className="flex items-center justify-between border-b border-gray-200 pb-2">
-                <span className="text-gray-600 font-medium">Apellido:</span>
-                <span className="text-indigo-700">
-                  {profileData.user.last_name}
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
+        {profileData && <UserProfile profileData={profileData} />}
       </div>
     </div>
   );
