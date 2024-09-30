@@ -1,6 +1,6 @@
 import React from 'react';
 import SculptorsList from '@/components/Admin/Escultores/SculptorsList';
-import AddSculptorForm from '@/components/Admin/AddSculptorForm';
+import AddSculptorForm from '@/components/Admin/Escultores/AddSculptorForm';
 
 function AdminEscultoresPage() {
   return (

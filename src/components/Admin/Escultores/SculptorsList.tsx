@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useUserStore } from '@/store/userStore';
 
 interface Escultor {
   id: number;
@@ -12,9 +13,11 @@ interface Escultor {
 }
 
 const EscultoresList = () => {
+  const { user } = useUserStore();
   const [escultores, setEscultores] = useState<Escultor[]>([]);
   const [nextPage, setNextPage] = useState<string | null>(null);
   const [prevPage, setPrevPage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchEscultores('https://tp-final-bienal.onrender.com/api/escultores/');
@@ -29,6 +32,7 @@ const EscultoresList = () => {
       setPrevPage(data.previous);
     } catch (error) {
       console.error('Error fetching data:', error);
+      setError('Error al cargar los escultores. Por favor, intente de nuevo.');
     }
   };
 
@@ -44,12 +48,66 @@ const EscultoresList = () => {
     }
   };
 
+  const deleteSculptor = async (id: string) => {
+    try {
+      const response = await fetch(
+        `https://tp-final-bienal.onrender.com/api/escultores/${id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${user?.token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        if (
+          response.headers.get('content-type')?.includes('application/json')
+        ) {
+          const errorData = await response.json();
+          throw new Error(errorData.detail || 'Failed to delete sculptor');
+        } else {
+          const errorText = await response.text();
+          throw new Error(`Failed to delete sculptor: ${errorText}`);
+        }
+      }
+    } catch (error) {
+      console.error('Error deleting sculptor:', error);
+      throw error;
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteSculptor(id);
+      setEscultores((prevEscultores) =>
+        prevEscultores.filter((escultor) => escultor.id.toString() !== id)
+      );
+      setError(null);
+    } catch (error) {
+      console.error('Error deleting sculptor:', error);
+      setError('Error al eliminar el escultor. Por favor, intente de nuevo.');
+    }
+  };
+
+  console.log(user);
+
   return (
-    <div className="bg-gray-100  p-8">
+    <div className="bg-gray-100 p-8 w-full">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">
           Lista de Escultores
         </h1>
+        {error && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+            role="alert"
+          >
+            <strong className="font-bold">Error: </strong>
+            <span className="block sm:inline">{error}</span>
+          </div>
+        )}
         <div className="bg-white shadow-md rounded-lg overflow-hidden">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
@@ -94,9 +152,12 @@ const EscultoresList = () => {
                     >
                       Editar
                     </a>
-                    <a href="#" className="text-red-600 hover:text-red-900">
+                    <button
+                      onClick={() => handleDelete(escultor.id.toString())}
+                      className="text-red-600 hover:text-red-900"
+                    >
                       Eliminar
-                    </a>
+                    </button>
                   </td>
                 </tr>
               ))}
