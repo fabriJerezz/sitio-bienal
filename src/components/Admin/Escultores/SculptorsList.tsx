@@ -104,15 +104,26 @@ const EscultoresList = () => {
 
   const handleSaveEdit = async (updatedSculptor: Escultor) => {
     try {
+      const formData = new FormData();
+      formData.append('nombre', updatedSculptor.nombre);
+      formData.append('apellido', updatedSculptor.apellido);
+      formData.append('fecha_nacimiento', updatedSculptor.fecha_nacimiento);
+      formData.append('nacionalidad', updatedSculptor.nacionalidad);
+      formData.append('eventos_ganados', updatedSculptor.eventos_ganados);
+      if (updatedSculptor.foto_perfil) {
+        const response = await fetch(updatedSculptor.foto_perfil);
+        const blob = await response.blob();
+        formData.append('foto_perfil', blob, 'profile.jpg');
+      }
+
       const response = await fetch(
         `https://tp-final-bienal.onrender.com/api/escultores/${updatedSculptor.id}/`,
         {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json',
             Authorization: `Token ${user?.token}`,
           },
-          body: JSON.stringify(updatedSculptor),
+          body: formData,
         }
       );
 
@@ -200,10 +211,10 @@ const EscultoresList = () => {
                       {escultor.nacionalidad}
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <td className="px-6 py-4  text-sm font-medium ">
                     <button
                       onClick={() => handleEdit(escultor.id.toString())}
-                      className="text-indigo-600 hover:text-indigo-900 mr-3"
+                      className="text-indigo-600 hover:text-indigo-900 mr-10"
                     >
                       Editar
                     </button>

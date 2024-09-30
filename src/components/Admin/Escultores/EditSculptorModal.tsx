@@ -27,6 +27,21 @@ const EditSculptorModal: React.FC<EditSculptorModalProps> = ({
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setEditingSculptor((prevSculptor) => {
+        if (prevSculptor) {
+          return {
+            ...prevSculptor,
+            foto_perfil: URL.createObjectURL(file),
+          };
+        }
+        return null;
+      });
+    }
+  };
+
   return (
     <Modal
       isOpen={!!escultor}
@@ -59,7 +74,7 @@ const EditSculptorModal: React.FC<EditSculptorModalProps> = ({
                       nombre: e.target.value,
                     })
                   }
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="p-2 bg-slate-400/15 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
             </div>
@@ -75,7 +90,7 @@ const EditSculptorModal: React.FC<EditSculptorModalProps> = ({
                       apellido: e.target.value,
                     })
                   }
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="p-2 bg-slate-400/15 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
             </div>
@@ -91,7 +106,18 @@ const EditSculptorModal: React.FC<EditSculptorModalProps> = ({
                       nacionalidad: e.target.value,
                     })
                   }
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="p-2 bg-slate-400/15 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 "
+                />
+              </label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Foto de Perfil:
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="p-2 bg-slate-400/15 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </label>
             </div>
