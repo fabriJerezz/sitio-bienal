@@ -1,8 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useUserStore } from '@/store/userStore';
+import Modal from 'react-modal'; // Asegúrate de tener react-modal instalado
+import EditSculptorModal from './EditSculptorModal';
 
-interface Escultor {
+export interface Escultor {
   id: number;
   nombre: string;
   apellido: string;
@@ -18,6 +20,7 @@ const EscultoresList = () => {
   const [nextPage, setNextPage] = useState<string | null>(null);
   const [prevPage, setPrevPage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [editingSculptor, setEditingSculptor] = useState<Escultor | null>(null);
 
   useEffect(() => {
     fetchEscultores('https://tp-final-bienal.onrender.com/api/escultores/');
@@ -91,6 +94,50 @@ const EscultoresList = () => {
     }
   };
 
+  const handleEdit = (id: string) => {
+    const escultor = escultores.find(
+      (escultor) => escultor.id.toString() === id
+    );
+    if (escultor) {
+      setEditingSculptor(escultor);
+    }
+  };
+
+  const handleSaveEdit = async (updatedSculptor: Escultor) => {
+    try {
+      const response = await fetch(
+        `https://tp-final-bienal.onrender.com/api/escultores/${updatedSculptor.id}/`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${user?.token}`,
+          },
+          body: JSON.stringify(updatedSculptor),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Failed to update sculptor');
+      }
+
+      const updatedSculptorData = await response.json();
+      setEscultores((prevEscultores) =>
+        prevEscultores.map((escultor) =>
+          escultor.id === updatedSculptorData.id
+            ? updatedSculptorData
+            : escultor
+        )
+      );
+      setEditingSculptor(null);
+      setError(null);
+    } catch (error) {
+      console.error('Error updating sculptor:', error);
+      setError('Error al actualizar el escultor. Por favor, intente de nuevo.');
+    }
+  };
+
   console.log(user);
 
   return (
@@ -116,6 +163,12 @@ const EscultoresList = () => {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
+                  ID
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
                   Nombre
                 </th>
                 <th
@@ -136,6 +189,9 @@ const EscultoresList = () => {
               {escultores.map((escultor) => (
                 <tr key={escultor.id}>
                   <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">{escultor.id}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">
                       {escultor.nombre} {escultor.apellido}
                     </div>
@@ -146,12 +202,12 @@ const EscultoresList = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <a
-                      href="#"
+                    <button
+                      onClick={() => handleEdit(escultor.id.toString())}
                       className="text-indigo-600 hover:text-indigo-900 mr-3"
                     >
                       Editar
-                    </a>
+                    </button>
                     <button
                       onClick={() => handleDelete(escultor.id.toString())}
                       className="text-red-600 hover:text-red-900"
@@ -181,6 +237,11 @@ const EscultoresList = () => {
           </button>
         </div>
       </div>
+      <EditSculptorModal
+        escultor={editingSculptor}
+        onSave={handleSaveEdit}
+        onClose={() => setEditingSculptor(null)}
+      />
     </div>
   );
 };

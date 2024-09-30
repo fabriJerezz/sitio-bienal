@@ -35,12 +35,18 @@ const Admin = () => {
             Bienvenido al panel de administración. Desde aquí podrás gestionar:
           </p>
           <ul className="list-none text-gray-600 space-y-2">
-            {['Escultores', 'Obras', 'Eventos'].map((item, index) => (
-              <li key={index} className="flex items-center">
-                <span className="text-indigo-500 mr-2">&#8226;</span>
-                {item}
-              </li>
-            ))}
+            <li className="flex items-center">
+              <span className="text-indigo-500 mr-2">&#8226;</span>
+              Escultores
+            </li>
+            <li className="flex items-center">
+              <span className="text-indigo-500 mr-2">&#8226;</span>
+              Obras
+            </li>
+            <li className="flex items-center">
+              <span className="text-indigo-500 mr-2">&#8226;</span>
+              Eventos
+            </li>
           </ul>
           <p className="text-center text-sm text-gray-500 mt-6 italic">
             Utiliza la barra lateral para navegar entre las diferentes
