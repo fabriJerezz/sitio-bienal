@@ -31,7 +31,7 @@ const Navbar = () => {
         window.removeEventListener('scroll', controlNavbar);
       };
     }
-  }, []);
+  }, [lastScrollY]);
   return (
     <div
       className={`text-secondary w-screen z-50 flex items-center fixed py-3 transition-transform duration-300 ${
