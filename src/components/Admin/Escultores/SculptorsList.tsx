@@ -10,7 +10,7 @@ export interface Escultor {
   fecha_nacimiento: string;
   nacionalidad: string;
   eventos_ganados: string;
-  foto_perfil: string | null;
+  foto_perfil: File | null;
 }
 
 const EscultoresList = () => {
@@ -110,10 +110,9 @@ const EscultoresList = () => {
       formData.append('fecha_nacimiento', updatedSculptor.fecha_nacimiento);
       formData.append('nacionalidad', updatedSculptor.nacionalidad);
       formData.append('eventos_ganados', updatedSculptor.eventos_ganados);
+
       if (updatedSculptor.foto_perfil) {
-        const response = await fetch(updatedSculptor.foto_perfil);
-        const blob = await response.blob();
-        formData.append('foto_perfil', blob, 'profile.jpg');
+        formData.append('foto_perfil', updatedSculptor.foto_perfil);
       }
 
       const response = await fetch(
@@ -147,8 +146,6 @@ const EscultoresList = () => {
       setError('Error al actualizar el escultor. Por favor, intente de nuevo.');
     }
   };
-
-  console.log(user);
 
   return (
     <div className="bg-gray-100 p-8 w-full">
