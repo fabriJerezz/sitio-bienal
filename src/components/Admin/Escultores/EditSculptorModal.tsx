@@ -34,7 +34,7 @@ const EditSculptorModal: React.FC<EditSculptorModalProps> = ({
         if (prevSculptor) {
           return {
             ...prevSculptor,
-            foto_perfil: URL.createObjectURL(file),
+            foto_perfil: file, // Store the file object directly
           };
         }
         return null;

@@ -111,7 +111,7 @@ const EscultoresList = () => {
       formData.append('nacionalidad', updatedSculptor.nacionalidad);
       formData.append('eventos_ganados', updatedSculptor.eventos_ganados);
 
-      if (updatedSculptor.foto_perfil) {
+      if (updatedSculptor.foto_perfil instanceof File) {
         formData.append('foto_perfil', updatedSculptor.foto_perfil);
       }
 
