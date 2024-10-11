@@ -10,6 +10,7 @@ export declare interface UserReturnedData {
     token: string;
     role: string;
     country: string;
+    staff: boolean;
 }
 
 export declare interface UserRegistration {

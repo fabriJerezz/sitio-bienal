@@ -10,7 +10,7 @@ const Admin = () => {
   const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
-    if (user?.role !== 'STAFF') {
+    if (user?.staff === false) {
       router.push('/unauthorized');
     } else {
       fetch('https://tp-final-bienal.onrender.com/profile/', {

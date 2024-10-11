@@ -3,8 +3,7 @@ import UsersList from '@/components/Admin/Usuarios/UsersList';
 
 function page() {
   return (
-    <div>
-      <h1>Usuarios</h1>
+    <div className='bg-slate-300'>
       <UsersList />
     </div>
   );

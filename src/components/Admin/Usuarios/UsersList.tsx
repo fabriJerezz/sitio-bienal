@@ -14,8 +14,8 @@ export interface Usuario {
 
 const UserList = () => {
   const { user } = useUserStore();
-  const [usuarios, setUsuarios] = useState<Usuario[]>([]);
-  const [nextPage, setNextPage] = useState<string | null>(null);
+  const [usuarios, setUsuarios] = useState<Usuario[]>([]); 
+  const [nextPage, setNextPage] = useState<string | null>(null); 
   const [prevPage, setPrevPage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
