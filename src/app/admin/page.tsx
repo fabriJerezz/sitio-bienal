@@ -10,12 +10,13 @@ const Admin = () => {
   const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
-    if (user?.staff === false) {
+    console.log(`User:`,user);
+    if (user?.staff === false || user === null) {
       router.push('/unauthorized');
     } else {
       fetch('https://tp-final-bienal.onrender.com/profile/', {
         headers: {
-          Authorization: `Token ${user.token}`,
+          Authorization: `Token ${user?.token}`,
         },
       })
         .then((response) => response.json())
@@ -23,6 +24,7 @@ const Admin = () => {
         .catch((error) => console.error('Error fetching profile data:', error));
     }
   }, [user, router]);
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 p-6">
