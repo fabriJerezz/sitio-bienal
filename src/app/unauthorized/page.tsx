@@ -7,7 +7,7 @@ const Unauthorized = () => {
       <header className="text-center mb-8">
         <h1 className="text-6xl font-bold mb-4 border-b-1">No Autorizado </h1>
 
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center gap-2">
           <h3 className="text-xl">
             Lo sentimos, no tienes acceso a esta página
           </h3>
