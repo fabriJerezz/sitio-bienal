@@ -1,3 +1,4 @@
+import { ModifiedSculptor } from '@/types';
 
 
 export declare interface UserAuthentication {
@@ -29,3 +30,35 @@ declare interface UserStore {
     logout: () => void;
 }
 
+export declare interface Sculptor {
+    id: string | number;
+    name: string;
+    lastName: string;
+    birthdate: string;
+    nacionality: string;
+    winnedEvents: number;
+    image: string;
+}
+
+export declare type NewSculptor = Omit<Sculptor, 'id'>;
+
+export declare type ModifiedSculptor = Partial<NewSculptor>;
+
+
+export declare interface Sculpture {
+    id: string | number;
+    title: string;
+    creationDate: string;
+    qrCode: string;
+    qrExpiration: {
+        date: string;
+        time: string;
+    };
+    material: string;
+    sculptorId: number;
+    eventId: number;
+}
+
+export declare type NewSculpture = Omit<Sculpture, 'id' | 'qrCode' | 'qrExpiration'>;
+
+export declare type ModifiedSculpture = Partial<NewSculpture>;
