@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import { useUserStore } from '@/store/userStore';
+import useUserStore from '@/store/userStore';
 import { LoginDropdownMenu } from '@/components/Users/login-dropdown-menu';
 
 
@@ -10,7 +10,7 @@ const Navbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const user = useUserStore.getState().user;
-  const isAdmin = useMemo(() => user?.role === 'STAFF', [user]);
+  const isAdmin = useMemo(() => user?.staff, [user]);
 
  console.log(user)
   const controlNavbar = (): void => {
@@ -44,6 +44,7 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           {isAdmin && <Link href="/admin">admin</Link>}
           {!user && <LoginDropdownMenu />}
+          {user && <button onClick={() => useUserStore.getState().logout()}>Salir</button>}
         </div>
       </div>
     </div>

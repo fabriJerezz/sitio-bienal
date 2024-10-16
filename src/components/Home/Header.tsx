@@ -1,4 +1,4 @@
-import { useUserStore } from '@/store/userStore';
+import useUserStore from '@/store/userStore';
 import { useEffect } from 'react';
 import Link from 'next/link';
 

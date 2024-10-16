@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { UserAuthentication, UserReturnedData, UserStore } from "@/types";
 import userService from "@/services/userService";
 
-export const useUserStore = create<UserStore>((set) => ({
+const useUserStore = create<UserStore>((set) => ({
     //state
     user: null as UserReturnedData | null,
     //actions
@@ -17,3 +17,5 @@ export const useUserStore = create<UserStore>((set) => ({
     },
     logout: () => set({ user: null }),
 }));    
+
+export default useUserStore;

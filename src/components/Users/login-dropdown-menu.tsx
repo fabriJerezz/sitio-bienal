@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import { LogIn, Mail, Lock, User } from "lucide-react"
+import { LogIn, Lock, User } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -26,35 +26,41 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import Link from "next/link"
+import useUserStore from "@/store/userStore"
+
 
 const formSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-  password: z.string().min(6, { message: "Password must be at least 6 characters" }),
+  username: z.string(),
+  password: z.string().min(6, { message: "La contraseña debe tener al menos 6 caracteres" }),
 })
 
 type FormValues = z.infer<typeof formSchema>
 
 export function LoginDropdownMenu() {
   const [isOpen, setIsOpen] = useState(false)
-
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   })
+  
+  const userStore = useUserStore();
 
   const onSubmit = (values: FormValues) => {
-    // Handle login logic here
+    userStore.login({username: values.username, password: values.password});
+
     console.log("Login attempted with:", values)
-    setIsOpen(false)
+    if (userStore.user) setIsOpen(false)
+    if (form.formState.errors) setErrorMessage("Usuario o contraseña incorrectos")
   }
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="bg-transparent text-white text-md hover:bg-white/10">
+        <Button variant="ghost" className="bg-transparent hover:text-white/80 focus:border-white/0 text-white text-md hover:bg-white/10">
           <LogIn className="mr-2 h-4 w-4" />
           Ingresar
         </Button>
@@ -65,23 +71,27 @@ export function LoginDropdownMenu() {
             <DropdownMenuLabel className="text-center text-lg font-bold">Login</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup className="space-y-3 py-3">
-              <FormField
+            {errorMessage && (
+                <div className="text-red-500 text-sm text-center mb-2">
+                  {errorMessage}
+                </div>
+              )}
+            <FormField
                 control={form.control}
-                name="email"
+                name="username"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex items-center">
-                      <Mail className="mr-2 h-4 w-4" />
-                      Email
+                      <User className="mr-2 h-4 w-4" />
+                      Usuario o Email
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter your email"
+                        placeholder="Ingresá tu usuario o email"
                         {...field}
-                        className="text-sm bg-black/55 text-white border-white/20"
+                        className="text-sm bg-black text-white border-white/20"
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -92,17 +102,16 @@ export function LoginDropdownMenu() {
                   <FormItem>
                     <FormLabel className="flex items-center">
                       <Lock className="mr-2 h-4 w-4" />
-                      Password
+                      Contraseña
                     </FormLabel>
                     <FormControl>
                       <Input
                         type="password"
-                        placeholder="Enter your password"
+                        placeholder="Ingresá tu contraseña"
                         {...field}
                         className="text-sm bg-black/55 text-white border-white/20"
                       />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -115,13 +124,13 @@ export function LoginDropdownMenu() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href="/reset-password" className="flex items-center text-sm hover:bg-white/10">
+            <Link href="/restablecer-contrasena" className="flex items-center text-sm hover:bg-white/10">
               <Lock className="mr-2 h-3 w-3" />
               <span>Restablecer contraseña</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/register" className="flex items-center text-sm hover:bg-white/10">
+            <Link href="/registro" className="flex items-center text-sm hover:bg-white/10">
               <User className="mr-2 h-3 w-3" />
               <span>Registrarse</span>
             </Link>
