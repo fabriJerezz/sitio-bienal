@@ -1,16 +1,7 @@
-import React from 'react'
-
+import React from 'react';
+import { RegisterFormComponent } from '@/components/register-form';
 const Register = () => {
-  return (
-    <>
-        <h1>Registro</h1>
-        <form>
-            <input type="text" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button type="submit">Registrarse</button>
-        </form>
-    </>
-  )
-}
+  return <RegisterFormComponent />;
+};
 
 export default Register;
