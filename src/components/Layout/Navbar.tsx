@@ -41,9 +41,9 @@ const Navbar = () => {
       <div className="flex items-center justify-between w-[90%] mx-auto">
         <Link href="/" className="text-2xl font-bold">Sitio Bienal</Link>
         <div className="flex items-center gap-4">
-          {/* {isAdmin &&  */}
-            <Link href="/admin">dmin</Link>
-          {/* } */}
+
+            <Link href="/admin">admin</Link>
+          {!user && <button>Ingresar</button>}
         </div>
       </div>
     </div>

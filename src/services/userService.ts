@@ -4,6 +4,7 @@ import {
   UserReturnedData,
 } from '@/types';
 import keysToCamelCase from '@/utils/toCamelCase';
+
 const userService = {
   authenticateUser: async (
     user: UserAuthentication
