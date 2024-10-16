@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { useUserStore } from '@/store/userStore';
-
+import { LoginDropdownMenu } from '@/components/Users/login-dropdown-menu';
 
 
 const Navbar = () => {
@@ -12,6 +12,7 @@ const Navbar = () => {
   const user = useUserStore.getState().user;
   const isAdmin = useMemo(() => user?.role === 'STAFF', [user]);
 
+ console.log(user)
   const controlNavbar = (): void => {
     if (typeof window !== 'undefined') {
       if (window.scrollY > lastScrollY) {
@@ -41,9 +42,8 @@ const Navbar = () => {
       <div className="flex items-center justify-between w-[90%] mx-auto">
         <Link href="/" className="text-2xl font-bold">Sitio Bienal</Link>
         <div className="flex items-center gap-4">
-
-            <Link href="/admin">admin</Link>
-          {!user && <button>Ingresar</button>}
+          {isAdmin && <Link href="/admin">admin</Link>}
+          {!user && <LoginDropdownMenu />}
         </div>
       </div>
     </div>
