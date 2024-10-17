@@ -36,9 +36,11 @@ export default function Header() {
           </h2>
         </header>
         <div className="flex gap-10 justify-center items-center text-xl">
-          <button className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300">
-            Explorar obras
-          </button>
+          <Link href="/obras">
+            <button className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300">
+              Explorar obras
+            </button>
+          </Link>
           <Link
             href="/escultores"
             className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300"
