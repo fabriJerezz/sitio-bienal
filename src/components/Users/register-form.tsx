@@ -34,27 +34,27 @@ const countries = [
   { code: 'ES', name: 'España', flag: '🇪🇸' },
 ];
 
-const formSchema = z.object({
-  username: z
-    .string()
-    .min(3, { message: 'El usuario debe tener al menos 3 caracteres' }),
-  password: z
-    .string()
-    .min(8, { message: 'La contraseña debe tener al menos 8 caracteres' }),
-  confirmPassword: z
-    .string()
-    .refine((val, ctx) => val === ctx.parent.password, {
-      message: 'Las contraseñas no coinciden',
-      path: ['confirmPassword'],
-    }),
-  country: z.string().min(1, { message: 'Por favor seleccione un país' }),
-  email: z.string().email({ message: 'Ingrese un email válido' }),
-  firstName: z.string().min(1, { message: 'El nombre es requerido' }),
-  lastName: z.string().min(1, { message: 'El apellido es requerido' }),
-  birthdate: z
-    .string()
-    .min(1, { message: 'La fecha de nacimiento es requerida' }),
-});
+const formSchema = z
+  .object({
+    username: z
+      .string()
+      .min(3, { message: 'El usuario debe tener al menos 3 caracteres' }),
+    password: z
+      .string()
+      .min(8, { message: 'La contraseña debe tener al menos 8 caracteres' }),
+    confirmPassword: z.string(),
+    country: z.string().min(1, { message: 'Por favor seleccione un país' }),
+    email: z.string().email({ message: 'Ingrese un email válido' }),
+    firstName: z.string().min(1, { message: 'El nombre es requerido' }),
+    lastName: z.string().min(1, { message: 'El apellido es requerido' }),
+    birthdate: z
+      .string()
+      .min(1, { message: 'La fecha de nacimiento es requerida' }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ['confirmPassword'], // Indica qué campo genera el error
+    message: 'Las contraseñas no coinciden',
+  });
 
 export function RegisterFormComponent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -210,30 +210,33 @@ export function RegisterFormComponent() {
                     <FormItem className="w-full">
                       <FormLabel>Contraseña</FormLabel>
                       <FormControl>
-                        <Input placeholder="Ingrese su contraseña" {...field} />
+                        <Input
+                          type="password"
+                          placeholder="Ingrese su contraseña"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                {watchPassword && (
-                  <FormField
-                    control={form.control}
-                    name="confirmPassword"
-                    render={({ field }) => (
-                      <FormItem className="w-full">
-                        <FormLabel>Confirmar contraseña</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Confirme su contraseña"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                )}
+                <FormField
+                  control={form.control}
+                  name="confirmPassword"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Confirmar contraseña</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="Confirme su contraseña"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
 
               <Button type="submit" className="w-full" disabled={isSubmitting}>

@@ -1,6 +1,6 @@
-import { create } from "zustand";
-import { UserAuthentication, UserReturnedData, UserStore } from "@/types";
-import userService from "@/services/userService";
+import { create } from 'zustand';
+import { UserAuthentication, UserReturnedData, UserStore } from '@/types';
+import userService from '@/services/userService';
 
 const useUserStore = create<UserStore>((set) => ({
     //state
@@ -8,14 +8,15 @@ const useUserStore = create<UserStore>((set) => ({
     //actions
     login: async (user: UserAuthentication) => {
         try {
-            const userReturnedData : UserReturnedData = await userService.authenticateUser(user);
+            const userReturnedData: UserReturnedData =
+                await userService.authenticateUser(user);
             set({ user: userReturnedData });
         } catch (error) {
-            console.error("Failed to authenticate user:", error);
-            // Optionally, you can handle the error state here
+            console.error('Failed to authenticate user:', error);
+            throw error;
         }
     },
     logout: () => set({ user: null }),
-}));    
+}));
 
 export default useUserStore;

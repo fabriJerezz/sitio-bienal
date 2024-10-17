@@ -4,17 +4,17 @@ import Link from 'next/link';
 
 export default function Header() {
   const user = useUserStore((state) => state.user);
-  // const login = useUserStore((state) => state.login);
-  // const logout = useUserStore((state) => state.logout);
+  const login = useUserStore((state) => state.login);
+  const logout = useUserStore((state) => state.logout);
 
-  // const newUser = {
-  //   username: 'fabri',
-  //   password: 'elfrontend12',
-  // };
+  const newUser = {
+    username: 'fabri',
+    password: 'elfrontend12',
+  };
 
-  // useEffect(() => {
-  //   login(newUser);
-  // }, []);
+  useEffect(() => {
+    login(newUser);
+  }, []);
 
   console.log(user);
   return (
