@@ -20,6 +20,7 @@ export function FocusCardsDemo() {
     try {
       // Actualizar el estado con los resultados obtenidos
       setObras(data.results);
+      console.log(data.results);
       // Actualizar la URL de la siguiente página
       setNextPage(data.next);
       // Actualizar la URL de la página anterior
@@ -47,7 +48,7 @@ export function FocusCardsDemo() {
   const mapObrasToCards = (obras: any[]) => {
     return obras.map((obra) => ({
       title: obra.titulo,
-      src: obra.imageUrl,
+      src: obra.foto1,
     }));
   };
 

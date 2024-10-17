@@ -25,7 +25,10 @@ export const Card = React.memo(
       )}
     >
       <Image
-        src={card.src}
+        src={
+          `https://res.cloudinary.com/dq1vfo4c8/${card.src}` ||
+          'https://via.placeholder.com/300'
+        }
         alt={card.title}
         fill
         className="object-cover absolute inset-0"
