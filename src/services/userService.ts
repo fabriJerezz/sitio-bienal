@@ -4,6 +4,8 @@ import {
   UserReturnedData,
 } from '@/types';
 import keysToCamelCase from '@/utils/toCamelCase';
+import  keysToSnakeCase  from '@/utils/toSnakeCase';
+
 const userService = {
   authenticateUser: async (
     user: UserAuthentication
@@ -31,6 +33,7 @@ const userService = {
   },
   registerUser: async (user: UserRegistration): Promise<UserReturnedData> => {
     try {
+      const snakeCaseUser = keysToSnakeCase(user);
       const response = await fetch(
         `https://tp-final-bienal.onrender.com/register`,
         {
@@ -38,7 +41,7 @@ const userService = {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(user),
+          body: JSON.stringify(snakeCaseUser),
         }
       );
       if (!response.ok) {
