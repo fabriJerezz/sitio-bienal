@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useUserStore } from '@/store/userStore';
+import useUserStore from '@/store/userStore';
 
 export interface Usuario {
   id: number;

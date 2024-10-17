@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useUserStore } from '@/store/userStore';
+import useUserStore from '@/store/userStore';
 import UserProfile from '@/components/Admin/UserProfile';
 
 const Admin = () => {
@@ -11,7 +11,7 @@ const Admin = () => {
 
   useEffect(() => {
     console.log(`User:`,user);
-    if (user?.staff === false || user === null) {
+    if (!user || !user.staff) {
       router.push('/unauthorized');
     } else {
       fetch('https://tp-final-bienal.onrender.com/profile/', {
@@ -59,7 +59,7 @@ const Admin = () => {
           <div className="mt-10 text-center">
             <p className="text-sm text-indigo-600 font-medium bg-indigo-100 py-2 px-4 rounded-full inline-block">
               Conectado como:{' '}
-              <span className="font-bold">{profileData?.user.username}</span>
+              <span className="font-bold">{profileData?.username}</span>
             </p>
           </div>
         )}
