@@ -23,6 +23,9 @@ import {
 } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import userService from '@/services/userService';
+import { UserRegistration } from '@/types';
+import { useRouter } from 'next/navigation';
+
 
 const countries = [
   { code: 'AR', name: 'Argentina', flag: '🇦🇷' },
@@ -58,7 +61,8 @@ const formSchema = z
 
 export function RegisterFormComponent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const [successMessage, setSuccessMessage] = useState('');
+  const [infoMessage, setInfoMessage] = useState('');
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -71,12 +75,37 @@ export function RegisterFormComponent() {
       birthdate: '',
     },
   });
-
-  const watchPassword = form.watch('password');
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const router = useRouter();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    userService.registerUser(values);
+    const finalUserObject = {
+      user: {
+        username: values.username,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        password: values.password,
+      },
+      userExtra: {
+        country: values.country,
+        birthdate: values.birthdate,
+      },
+    };
+    try {
+      await userService.registerUser(finalUserObject as UserRegistration);
+      form.reset();
+      setSuccessMessage('Usuario registrado con éxito!');
+      setTimeout(() => {
+        setSuccessMessage('');
+        setInfoMessage('Redirigiendo a la página de inicio...');
+      }, 1500);
+      setTimeout(() => {
+        setInfoMessage('');
+        router.push('/');
+      }, 3500);
+    } catch (error) {
+      console.error('Error during registration:', error);
+    }
   }
 
   return (
@@ -87,6 +116,8 @@ export function RegisterFormComponent() {
             Registrarse
           </CardTitle>
         </CardHeader>
+        {successMessage && <p className="text-green-500 text-opacity-85 mb-4 text-start ml-6">{successMessage}</p>}
+        {infoMessage && <p className="text-blue-800 text-opacity-75 mb-4 text-start ml-6">{infoMessage}</p>}
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

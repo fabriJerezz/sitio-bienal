@@ -14,13 +14,19 @@ export declare interface UserReturnedData {
 }
 
 export declare interface UserRegistration {
-  username: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  birthdate: string;
-  country: string;
+  user: {
+    username: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    birthdate: string;
+    country: string;
+  };
+  userExtra: {
+    country: string;
+    birthdate: string;
+  };
 }
 
 declare interface UserStore {

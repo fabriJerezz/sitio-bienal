@@ -5,9 +5,13 @@ function toSnakeCase(str: string) {
     );
 }
 
-export function keysToSnakeCase(
-    obj: Record<string, unknown>
-): Record<string, unknown> {
+type SnakeCasedProperties<T> = {
+  [K in keyof T as K extends string ? `${K & string}` : never]: T[K];
+};
+
+export default function keysToSnakeCase<T extends Record<string, any>>(
+    obj: T
+): SnakeCasedProperties<T> {
     const newObj: Record<string, unknown> = {};
     for (const key in obj) {
         if (obj.hasOwnProperty(key)) {
@@ -15,5 +19,5 @@ export function keysToSnakeCase(
             newObj[newKey] = obj[key];
         }
     }
-    return newObj;
+    return newObj as SnakeCasedProperties<T>;
 }
