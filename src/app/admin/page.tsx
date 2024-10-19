@@ -10,7 +10,7 @@ const Admin = () => {
   const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
-    console.log(`User:`,user);
+    console.log(`User:`, user);
     if (!user || !user.staff) {
       router.push('/unauthorized');
     } else {
@@ -24,7 +24,6 @@ const Admin = () => {
         .catch((error) => console.error('Error fetching profile data:', error));
     }
   }, [user, router]);
-
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 p-6">
@@ -59,7 +58,7 @@ const Admin = () => {
           <div className="mt-10 text-center">
             <p className="text-sm text-indigo-600 font-medium bg-indigo-100 py-2 px-4 rounded-full inline-block">
               Conectado como:{' '}
-              <span className="font-bold">{profileData?.username}</span>
+              <span className="font-bold">{profileData?.user.username}</span>
             </p>
           </div>
         )}
