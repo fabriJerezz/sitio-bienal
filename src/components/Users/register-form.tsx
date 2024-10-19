@@ -26,7 +26,6 @@ import userService from '@/services/userService';
 import { UserRegistration } from '@/types';
 import { useRouter } from 'next/navigation';
 
-
 const countries = [
   { code: 'AR', name: 'Argentina', flag: '🇦🇷' },
   { code: 'BR', name: 'Brasil', flag: '🇧🇷' },
@@ -111,13 +110,21 @@ export function RegisterFormComponent() {
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <Card className="w-full max-w-xl bg-white bg-opacity-100 px-8 py-6 md:mt-8 transition-all duration-300">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">
+        <CardHeader className="w-full">
+          <CardTitle className="text-2xl font-bold text-center bg-slate-400/90 py-2 w-full  rounded-lg">
             Registrarse
           </CardTitle>
         </CardHeader>
-        {successMessage && <p className="text-green-500 text-opacity-85 mb-4 text-start ml-6">{successMessage}</p>}
-        {infoMessage && <p className="text-blue-800 text-opacity-75 mb-4 text-start ml-6">{infoMessage}</p>}
+        {successMessage && (
+          <p className="text-green-500 text-opacity-85 mb-4 text-start ml-6">
+            {successMessage}
+          </p>
+        )}
+        {infoMessage && (
+          <p className="text-blue-800 text-opacity-75 mb-4 text-start ml-6">
+            {infoMessage}
+          </p>
+        )}
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -127,7 +134,7 @@ export function RegisterFormComponent() {
                   name="firstName"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>Nombre</FormLabel>
+                      <FormLabel className="tracking-wider">Nombre</FormLabel>
                       <FormControl>
                         <Input placeholder="Ingrese su nombre" {...field} />
                       </FormControl>
@@ -140,7 +147,7 @@ export function RegisterFormComponent() {
                   name="lastName"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>Apellido</FormLabel>
+                      <FormLabel className="tracking-wider">Apellido</FormLabel>
                       <FormControl>
                         <Input placeholder="Ingrese su apellido" {...field} />
                       </FormControl>
@@ -156,7 +163,9 @@ export function RegisterFormComponent() {
                   name="birthdate"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>Fecha de nacimiento</FormLabel>
+                      <FormLabel className="tracking-wider">
+                        Fecha de nacimiento
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="date"
@@ -174,7 +183,7 @@ export function RegisterFormComponent() {
                   name="country"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>País</FormLabel>
+                      <FormLabel className="tracking-wider">País</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}

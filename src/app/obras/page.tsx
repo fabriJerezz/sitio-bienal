@@ -1,5 +1,6 @@
 'use client';
 import { FocusCards } from '@/components/Obras/FocusCard';
+import PieceFilter from '@/components/Obras/PieceFilter';
 import { useState, useEffect } from 'react';
 
 export function FocusCardsDemo() {
@@ -56,21 +57,27 @@ export function FocusCardsDemo() {
 
   return (
     <>
-      <div className="bg-slate-900">
+      <div className="bg-slate-900 ">
+        <header className="w-full pt-16 pb-5 flex justify-between px-20">
+          <h1 className="text-white text-3xl ">
+            <span className="font-bold">Our</span> Pieces
+          </h1>
+          <PieceFilter />
+        </header>
         <FocusCards cards={cards} />
       </div>
       <div className="flex justify-center mt-12 space-x-6">
         <button
           onClick={handlePrevPage}
           disabled={!prevPage} // Deshabilita el botón si no hay una página anterior
-          className="px-8 py-3 bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white rounded-full hover:from-[#7C3AED] hover:to-[#6D28D9] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
+          className="px-8 py-3 bg-gradient-to-r from-[#fcbe5a] to-[#f9ad21] text-black rounded-full hover:from-[#f9ad21] hover:to-[#ff8229] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
         >
           Anterior
         </button>
         <button
           onClick={handleNextPage}
-          disabled={!nextPage} // Deshabilita el botón si no hay una página siguiente
-          className="px-8 py-3 bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white rounded-full hover:from-[#7C3AED] hover:to-[#6D28D9] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
+          disabled={!nextPage} // Deshabilita el botón si no hay una página anterior
+          className="px-8 py-3 bg-gradient-to-r from-[#fcbe5a] to-[#f9ad21] text-black rounded-full hover:from-[#ff8229] hover:to-[#ff8229] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
         >
           Siguiente
         </button>
