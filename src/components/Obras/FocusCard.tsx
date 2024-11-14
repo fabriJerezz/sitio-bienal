@@ -33,7 +33,13 @@ const ErrorPopUp = ({
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div className="bg-white rounded-lg p-6 shadow-lg max-w-sm w-full flex flex-col justify-center items-center">
       <h2 className="text-xl font-semibold mb-4">Error</h2>
-      <p className="mb-4">{error}</p>
+
+      <p className="mb-4">
+        {error === 'Invalid token.'
+          ? 'Necesitas loguearte para poder votar'
+          : error}
+      </p>
+
       <button
         onClick={onClose}
         className="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-300"
