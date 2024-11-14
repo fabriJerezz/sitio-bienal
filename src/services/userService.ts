@@ -25,6 +25,7 @@ const userService = {
         throw new Error('Failed to authenticate user');
       }
       const data = await response.json();
+      
       return keysToCamelCase(data) as UserReturnedData;
     } catch (error) {
       console.error('Error during authentication:', error);
@@ -57,3 +58,4 @@ const userService = {
 };
 
 export default userService;
+          
