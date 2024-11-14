@@ -8,6 +8,7 @@ const links = [
   { name: 'Escultores', href: '/admin/escultores' },
   { name: 'Usuarios', href: '/admin/usuarios' },
   { name: 'Obras', href: '/admin/obras' },
+  { name: 'Eventos', href: '/admin/eventos' },
   { name: 'Configuración', href: '/admin/configuracion' },
 ];
 

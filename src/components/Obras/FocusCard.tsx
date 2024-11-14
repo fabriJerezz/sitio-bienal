@@ -135,9 +135,6 @@ export function FocusCards({ cards }: { cards: Card[] }) {
 
       if (response.ok) {
         setIsPopUpVisible(true);
-      } else {
-        console.error('Error al enviar el voto');
-        alert('Error al enviar el voto');
       }
     } catch (error) {
       console.error('Error al enviar el voto', error);
