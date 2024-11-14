@@ -25,7 +25,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import userService from '@/services/userService';
 import { UserRegistration } from '@/types';
 import { useRouter } from 'next/navigation';
-
+import keysToSnakeCase from '@/utils/toSnakeCase';
 
 const countries = [
   { code: 'AR', name: 'Argentina', flag: '🇦🇷' },
@@ -91,8 +91,10 @@ export function RegisterFormComponent() {
         birthdate: values.birthdate,
       },
     };
+    const snakeCaseUser = keysToSnakeCase(finalUserObject);
+    console.log(snakeCaseUser);
     try {
-      await userService.registerUser(finalUserObject as UserRegistration);
+      await userService.registerUser(snakeCaseUser as UserRegistration);
       form.reset();
       setSuccessMessage('Usuario registrado con éxito!');
       setTimeout(() => {
