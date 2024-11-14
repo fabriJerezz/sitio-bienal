@@ -67,7 +67,7 @@ export function FocusCardsDemo() {
         </header>
         <FocusCards cards={cards} />
 
-        <div className="flex justify-center mt-12 space-x-6">
+        <div className="flex justify-center mt-5 space-x-6">
           <button
             onClick={handlePrevPage}
             disabled={!prevPage} // Deshabilita el botón si no hay una página anterior
