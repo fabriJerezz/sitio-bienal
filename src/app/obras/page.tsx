@@ -48,6 +48,7 @@ export function FocusCardsDemo() {
 
   const mapObrasToCards = (obras: any[]) => {
     return obras.map((obra) => ({
+      id: obra.id,
       title: obra.titulo,
       src: obra.foto1,
     }));
@@ -57,30 +58,31 @@ export function FocusCardsDemo() {
 
   return (
     <>
-      <div className="bg-slate-900 ">
+      <div className="bg-slate-900 h-screen">
         <header className="w-full pt-16 pb-5 flex justify-between px-20">
           <h1 className="text-white text-3xl ">
-            <span className="font-bold">Our</span> Pieces
+            <span className="font-bold">Nuestas</span> Piezas
           </h1>
-          <PieceFilter />
+          {/* <PieceFilter /> */}
         </header>
         <FocusCards cards={cards} />
-      </div>
-      <div className="flex justify-center mt-12 space-x-6">
-        <button
-          onClick={handlePrevPage}
-          disabled={!prevPage} // Deshabilita el botón si no hay una página anterior
-          className="px-8 py-3 bg-gradient-to-r from-[#fcbe5a] to-[#f9ad21] text-black rounded-full hover:from-[#f9ad21] hover:to-[#ff8229] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
-        >
-          Anterior
-        </button>
-        <button
-          onClick={handleNextPage}
-          disabled={!nextPage} // Deshabilita el botón si no hay una página anterior
-          className="px-8 py-3 bg-gradient-to-r from-[#fcbe5a] to-[#f9ad21] text-black rounded-full hover:from-[#ff8229] hover:to-[#ff8229] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
-        >
-          Siguiente
-        </button>
+
+        <div className="flex justify-center mt-12 space-x-6">
+          <button
+            onClick={handlePrevPage}
+            disabled={!prevPage} // Deshabilita el botón si no hay una página anterior
+            className="px-8 py-3 bg-gradient-to-r from-[#fcbe5a] to-[#f9ad21] text-black rounded-full hover:from-[#f9ad21] hover:to-[#ff8229] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
+          >
+            Anterior
+          </button>
+          <button
+            onClick={handleNextPage}
+            disabled={!nextPage} // Deshabilita el botón si no hay una página anterior
+            className="px-8 py-3 bg-gradient-to-r from-[#fcbe5a] to-[#f9ad21] text-black rounded-full hover:from-[#ff8229] hover:to-[#ff8229] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
+          >
+            Siguiente
+          </button>
+        </div>
       </div>
     </>
   );
