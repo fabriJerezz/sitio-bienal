@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { cn } from '@/components/lib/utils';
 import useUserStore from '@/store/userStore';
+import { set } from 'react-hook-form';
 
 const PopUp = ({ onClose }: { onClose: () => void }) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -15,6 +16,27 @@ const PopUp = ({ onClose }: { onClose: () => void }) => (
       <button
         onClick={onClose}
         className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300"
+      >
+        Cerrar
+      </button>
+    </div>
+  </div>
+);
+
+const ErrorPopUp = ({
+  onClose,
+  error,
+}: {
+  onClose: () => void;
+  error: string;
+}) => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white rounded-lg p-6 shadow-lg max-w-sm w-full flex flex-col justify-center items-center">
+      <h2 className="text-xl font-semibold mb-4">Error</h2>
+      <p className="mb-4">{error}</p>
+      <button
+        onClick={onClose}
+        className="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-300"
       >
         Cerrar
       </button>
@@ -114,7 +136,9 @@ type Card = {
 export function FocusCards({ cards }: { cards: Card[] }) {
   const [hovered, setHovered] = useState<number | null>(null);
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
+  const [isErrorPopUpVisible, setIsErrorPopUpVisible] = useState(false);
   const [rating, setRating] = useState(1);
+  const [error, setError] = useState('');
   const user = useUserStore((state) => state.user);
 
   const handleVote = async (card: Card) => {
@@ -135,6 +159,11 @@ export function FocusCards({ cards }: { cards: Card[] }) {
 
       if (response.ok) {
         setIsPopUpVisible(true);
+      } else {
+        const error = await response.json();
+        console.error('Error al enviar el voto', error);
+        setError(error.detail);
+        setIsErrorPopUpVisible(true);
       }
     } catch (error) {
       console.error('Error al enviar el voto', error);
@@ -143,6 +172,10 @@ export function FocusCards({ cards }: { cards: Card[] }) {
 
   const handleClosePopUp = () => {
     setIsPopUpVisible(false);
+  };
+
+  const handleCloseErrorPopUp = () => {
+    setIsErrorPopUpVisible(false);
   };
 
   return (
@@ -160,6 +193,9 @@ export function FocusCards({ cards }: { cards: Card[] }) {
         />
       ))}
       {isPopUpVisible && <PopUp onClose={handleClosePopUp} />}
+      {isErrorPopUpVisible && (
+        <ErrorPopUp onClose={handleCloseErrorPopUp} error={error} />
+      )}
     </div>
   );
 }
