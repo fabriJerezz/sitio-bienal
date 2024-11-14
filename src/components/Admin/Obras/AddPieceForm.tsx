@@ -1,9 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useUserStore from '@/store/userStore';
 
 const AddPieceForm = () => {
   const user = useUserStore((state) => state.user);
+  const [escultores, setEscultores] = useState<
+    { id: number; nombre: string }[]
+  >([]);
+  const [eventos, setEventos] = useState<{ id: number; nombre: string }[]>([]);
   const [formData, setFormData] = useState({
     titulo: '',
     descripcion: '',
@@ -14,6 +18,59 @@ const AddPieceForm = () => {
     foto1: null as File | null,
     foto2: null as File | null,
   });
+
+  useEffect(() => {
+    const fetchEscultores = async () => {
+      let allEscultores: { id: number; nombre: string }[] = [];
+      let url: string | null =
+        'https://tp-final-bienal.onrender.com/api/escultores/';
+
+      while (url) {
+        try {
+          const response = await fetch(url);
+          const data: {
+            results: { id: number; nombre: string; apellido: string }[];
+            next: string | null;
+          } = await response.json();
+          allEscultores = [...allEscultores, ...data.results];
+          url = data.next; // Actualiza la URL con la siguiente página
+        } catch (error) {
+          console.error('Error fetching escultores:', error);
+          url = null; // Rompe el bucle en caso de error
+        }
+      }
+      setEscultores(allEscultores);
+    };
+
+    const fetchEventos = async () => {
+      let allEventos: { id: number; nombre: string }[] = [];
+      let url: string | null =
+        'https://tp-final-bienal.onrender.com/api/eventos/';
+
+      while (url) {
+        try {
+          const response = await fetch(url);
+          const data: {
+            results: { id: number; nombre: string }[];
+            next: string | null;
+          } = await response.json();
+          allEventos = [...allEventos, ...data.results];
+          url = data.next; // Actualiza la URL con la siguiente página
+        } catch (error) {
+          console.error('Error fetching eventos:', error);
+          url = null; // Rompe el bucle en caso de error
+        }
+      }
+
+      setEventos(allEventos);
+    };
+
+    fetchEscultores();
+    fetchEventos();
+  }, []);
+
+  console.log('Escultores:', escultores);
+  console.log('Eventos:', eventos);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -129,25 +186,35 @@ const AddPieceForm = () => {
             className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <p>ID Escultor</p>
-          <input
+          <select
             name="id_escultor"
-            type="number"
-            placeholder="ID Escultor"
             onChange={handleChange}
             value={formData.id_escultor}
             required
             className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          >
+            <option value="">Seleccione un escultor</option>
+            {escultores.map((escultor: any) => (
+              <option key={escultor.id} value={escultor.id}>
+                {escultor.nombre} {escultor.apellido}
+              </option>
+            ))}
+          </select>
           <p>ID Evento</p>
-          <input
+          <select
             name="id_evento"
-            type="number"
-            placeholder="ID Evento"
             onChange={handleChange}
             value={formData.id_evento}
             required
             className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          >
+            <option value="">Seleccione un evento</option>
+            {eventos.map((evento: any) => (
+              <option key={evento.id} value={evento.id}>
+                {evento.nombre}
+              </option>
+            ))}
+          </select>
           <input
             type="file"
             name="foto1"
