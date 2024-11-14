@@ -1,7 +1,7 @@
 // components/FlipCards.tsx
 'use client';
 import React from 'react';
-import './FlipCard.css';
+import '@/app/globals.css';
 import { useEffect, useState } from 'react';
 import { Escultura } from '@/components/Esculturas/paginationEsculturas';
 
@@ -40,15 +40,15 @@ const FlipCards: React.FC<FlipCardsProps> = ({ name, location, frontImage, backI
 
 
   return (
-    <div className="flip-card-wrapper">
-      <div className="flip-card-inner">
+    <div className="flip-card-wrapper ">
+      <div className="flip-card-inner rounded-lg">
         {/* Parte frontal de la tarjeta */}
-        <div className="flip-card-front">
-          <img src={frontImageUrl} alt="Front" className="card-image" />
+        <div className="flip-card-front rounded-lg">
+          <img src={frontImageUrl} alt="Front" className="card-image  rounded-lg" />
           <div className="card-name">{name}</div>
         </div>
         {/* Parte trasera de la tarjeta */}
-        <div className="flip-card-back">
+        <div className="flip-card-back bg-white rounded-lg">
           <img src={backImageUrl} alt="Back" className="card-image" />
           <div className="card-location">{location}</div>
 
