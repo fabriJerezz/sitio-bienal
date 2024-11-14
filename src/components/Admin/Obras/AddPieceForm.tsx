@@ -185,7 +185,7 @@ const AddPieceForm = () => {
             required
             className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <p>ID Escultor</p>
+          <p>Escultor</p>
           <select
             name="id_escultor"
             onChange={handleChange}
@@ -200,7 +200,7 @@ const AddPieceForm = () => {
               </option>
             ))}
           </select>
-          <p>ID Evento</p>
+          <p>Evento</p>
           <select
             name="id_evento"
             onChange={handleChange}
