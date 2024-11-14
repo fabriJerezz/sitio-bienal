@@ -32,7 +32,9 @@ const ErrorPopUp = ({
 }) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div className="bg-white rounded-lg p-6 shadow-lg max-w-sm w-full flex flex-col justify-center items-center">
-      <h2 className="text-xl font-semibold mb-4">Error</h2>
+      <h2 className="text-xl font-semibold mb-4">
+        {error === 'Invalid token.' ? 'Error de autenticación' : 'Error'}
+      </h2>
 
       <p className="mb-4">
         {error === 'Invalid token.'
