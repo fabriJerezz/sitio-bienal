@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { FocusCards } from '@/components/Esculturas/focus-card';
 
-interface Escultura {
+export interface Escultura {
   id: number;
   titulo: string;
   fecha_creacion: string;

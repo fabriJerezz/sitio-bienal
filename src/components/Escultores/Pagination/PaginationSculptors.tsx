@@ -2,7 +2,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import FlipCards from '../../Escultores/flipCard';
-
+import { Escultura } from '@/components/Esculturas/paginationEsculturas';
 interface Escultor {
   id: number;
   nombre: string;
@@ -22,8 +22,7 @@ const EscultoresList: React.FC = () => {
   useEffect(() => {
     fetchEscultores('https://tp-final-bienal.onrender.com/api/escultores/');
   }, []);
-
- 
+  
   const fetchEscultores = async (url: string) => {
     try {
       const res = await fetch(url);
@@ -41,6 +40,7 @@ const EscultoresList: React.FC = () => {
       {escultores.map((escultor) => (
         <FlipCards
           key={escultor.id}
+          escultorId={escultor.id}
           name={`${escultor.nombre} ${escultor.apellido}`}
           location={escultor.nacionalidad}
           frontImage={escultor.foto_perfil || 'https://via.placeholder.com/300'}
