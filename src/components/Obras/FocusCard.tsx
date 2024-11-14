@@ -116,13 +116,14 @@ export const Card = React.memo(
           hovered === index ? 'opacity-100' : 'opacity-0'
         )}
       >
-        <div className="flex flex-col w-full bg-white bg-opacity-75 p-4 rounded-lg">
-          <div className="text-xl md:text-2xl font-medium text-gray-900">
+        <div className="flex flex-col w-full bg-white bg-opacity-90 p-6 rounded-lg shadow-lg">
+          <div className="text-2xl md:text-3xl font-semibold text-gray-800 mb-2">
             {card.title}
           </div>
+          <p className="text-lg text-gray-700 mb-4">Rating</p>
           <Rating rating={rating} setRating={setRating} />
           <button
-            className="w-full mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300"
+            className="w-full mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
             onClick={() => handleVote(card)}
           >
             Votar
