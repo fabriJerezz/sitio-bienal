@@ -18,12 +18,12 @@ export default function ConcreteEventCard({
   portada,
 }: ConcreteEventCardProps) {
   return (
-    <div className="gap-1 py-2 px-2 relative w-64 h-full rounded-lg overflow-hidden shadow-lg bg-gray-800 flex flex-col">
-      <div className="relative w-full px-6 flex-grow">
+    <div className="gap-1 py-2 px-2 relative w-full h-full rounded-lg overflow-hidden shadow-lg bg-gray-800 flex flex-col">
+      <div className="relative w-full flex-grow">
         <div className="font-bold text-2xl mb-2 text-white">{nombre}</div>
         <p className="text-gray-300 text-sm">{descripcion}</p>
       </div>
-      <div className="px-8 pt-4 pb-2 w-full flex flex-col bg-gray-900 rounded-lg shadow-md">
+      <div className="px-4 pt-4 pb-2 w-full flex flex-col bg-gray-900 rounded-lg shadow-md">
         <span className="text-gray-300 font-semibold">
           Inicio: {fecha_inicio}
         </span>

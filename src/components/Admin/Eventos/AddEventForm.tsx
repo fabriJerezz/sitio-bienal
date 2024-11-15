@@ -82,7 +82,10 @@ const AddEventForm: React.FC = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center">
+    <div className="w-full h-full flex flex-col items-center justify-center relative">
+      <h1 className="text-2xl font-semibold text-center">
+        Añadir un nuevo evento
+      </h1>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col space-y-4 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md"
@@ -96,6 +99,7 @@ const AddEventForm: React.FC = () => {
           placeholder="Nombre del evento"
           className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+        <p>Fecha de Inicio:</p>
         <input
           type="date"
           name="fecha_inicio"
@@ -103,6 +107,7 @@ const AddEventForm: React.FC = () => {
           onChange={handleChange}
           className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+        <p>Fecha de finalizacion:</p>
         <input
           type="date"
           name="fecha_final"

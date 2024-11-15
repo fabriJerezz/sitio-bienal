@@ -24,25 +24,26 @@ export default function EventsCard({
   estado,
 }: CardEventsProps) {
   return (
-    <div className="flex relative w-4/5 h-64 bg-black rounded-xl shadow-lg overflow-hidden">
-      <div className="flex flex-col relative w-2/5 h-full items-center justify-center p-4 bg-gradient-to-r from-gray-800 to-black">
+    <div className="flex relative w-full h-64 bg-black rounded-xl shadow-lg overflow-hidden">
+      <div className="flex flex-col relative w-1/5 h-full items-center justify-center p-4 bg-gradient-to-r from-gray-800 to-black">
         <h1 className="pb-2 border-b-4 border-white text-center text-white font-extrabold text-4xl">
           {title}
         </h1>
         <p className="text-white text-center mt-3">{description}</p>
       </div>
-      <div className="zonaSlider w-3/5 h-full flex justify-center items-center bg-gray-600/5">
+      <div className="zonaSlider py-4 w-4/5 h-full flex justify-center items-center bg-black">
         <Carousel
           opts={{
             align: 'start',
             loop: true,
           }}
+          className="w-4/5 h-full"
         >
-          <CarouselContent className="h-fit-content">
+          <CarouselContent className="flex w-full h-full">
             {events.map((event) => (
               <CarouselItem
                 key={event.id}
-                className="md:basis-1/2 lg:basis-1/3 h-fit-content"
+                className=" w-full  h-full justify-center items-center md:basis-1/2"
               >
                 <ConcreteEventCard
                   nombre={event.nombre}
@@ -55,10 +56,9 @@ export default function EventsCard({
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex justify-between mt-4 w-full px-4">
-            <CarouselPrevious className="text-white" />
-            <CarouselNext className="text-white" />
-          </div>
+
+          <CarouselPrevious className="text-white" />
+          <CarouselNext className="text-white" />
         </Carousel>
       </div>
     </div>
