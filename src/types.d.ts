@@ -43,7 +43,7 @@ export declare interface Event {
   lugar: string;
   descripcion: string;
   estado: string;
-  portada: string;
+  portada: string | File;
 }
 
 export declare interface Sculptor {
