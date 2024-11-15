@@ -35,6 +35,15 @@ declare interface UserStore {
   logout: () => void;
 }
 
+export declare interface Event {
+  id: number;
+  nombre: string;
+  fecha_inicio: string;
+  fecha_final: string;
+  lugar: string;
+  descripcion: string;
+}
+
 export declare interface Sculptor {
   id: string | number;
   name: string;

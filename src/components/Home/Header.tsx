@@ -47,9 +47,12 @@ export default function Header() {
           >
             Conoce a los Escultores
           </Link>
-          <button className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300">
-            Proximos Eventos
-          </button>
+          <Link
+            href="/eventos"
+            className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300"
+          >
+            Eventos
+          </Link>
         </div>
       </div>
     </div>
