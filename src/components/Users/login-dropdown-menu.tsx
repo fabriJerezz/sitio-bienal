@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { LogIn, Lock, User } from 'lucide-react';
+import { LogIn, Lock, User, Mail, ArrowLeft } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -35,11 +35,18 @@ const formSchema = z.object({
     .min(6, { message: 'La contraseña debe tener al menos 6 caracteres' }),
 });
 
+const resetPasswordSchema = z.object({
+  email: z.string().email({ message: "Invalid email address" }),
+})
+
 type FormValues = z.infer<typeof formSchema>;
+type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>
 
 export function LoginDropdownMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isResetPassword, setIsResetPassword] = useState(false)
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,6 +54,13 @@ export function LoginDropdownMenu() {
       password: '',
     },
   });
+
+  const resetPasswordForm = useForm<ResetPasswordFormValues>({
+    resolver: zodResolver(resetPasswordSchema),
+    defaultValues: {
+      email: "",
+    },
+  })
 
   const userStore = useUserStore();
 
@@ -62,8 +76,26 @@ export function LoginDropdownMenu() {
     }
   };
 
+  const onResetPasswordSubmit = (values: ResetPasswordFormValues) => {
+    // Simulate password reset logic
+    console.log("Password reset requested for:", values.email);
+    setErrorMessage("Se ha enviado un mail para restablecer tu contraseña.");
+    setIsResetPassword(false);
+    // Keep the dropdown open
+    setIsOpen(true);
+  }
+
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+    if (!open) {
+      // Reset the form state when closing the dropdown
+      setIsResetPassword(false);
+      setErrorMessage(null);
+    }
+  }
+
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+    <DropdownMenu open={isOpen} onOpenChange={handleOpenChange}>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
@@ -80,8 +112,9 @@ export function LoginDropdownMenu() {
         data-side="bottom"
         style={{ maxHeight: 'calc(100vh - 10px)', overflowY: 'auto' }}
       >
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+        {!isResetPassword ? (
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
             <DropdownMenuLabel className="text-center text-lg font-bold">
               Login
             </DropdownMenuLabel>
@@ -139,27 +172,65 @@ export function LoginDropdownMenu() {
               </Button>
             </DropdownMenuGroup>
           </form>
-        </Form>
+          </Form>
+        ) : (
+          <Form {...resetPasswordForm}>
+            <form onSubmit={resetPasswordForm.handleSubmit(onResetPasswordSubmit)}>
+              <DropdownMenuLabel className="text-center text-lg font-bold">Restablecer contraseña</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup className="space-y-3 py-3">
+                <FormField
+                  control={resetPasswordForm.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="flex items-center">
+                        <Mail className="mr-2 h-4 w-4" /> Email
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Ingresá tu email"
+                          {...field}
+                          className="text-sm bg-black text-white border-white/20"
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                  />
+                  <Button
+                    type="submit"
+                    className="w-full text-sm py-1 bg-white/70 bg-opacity-85 text-black hover:bg-white"
+              >
+                  Restablecer contraseña
+                </Button>
+              </DropdownMenuGroup>
+            </form>
+          </Form>
+        )}
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem asChild>
-            <Link
-              href="/restablecer-contrasena"
-              className="flex items-center text-sm hover:bg-white/10"
-            >
-              <Lock className="mr-2 h-3 w-3" />
-              <span>Restablecer contraseña</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link
-              href="/registro"
-              className="flex items-center text-sm hover:bg-white/10"
-            >
-              <User className="mr-2 h-3 w-3" />
+          {isResetPassword ? (
+            <DropdownMenuItem asChild>
+                <Button variant="ghost" className="w-full text-sm py-1 bg-transparent text-opacity-85 text-white hover:bg-white" onClick={(e) => {e.preventDefault(); setIsResetPassword(false)}}>
+                  Volver al login
+                </Button>
+            </DropdownMenuItem>
+          ) : (
+            <>
+            <DropdownMenuItem asChild>
+              <Button variant="ghost" className="w-full text-sm flex justify-start py-1 bg-transparent text-opacity-85 text-white hover:bg-white" onClick={(e) => {e.preventDefault(); setIsResetPassword(true)}}>
+                <Lock className="mr-2 h-3.5 w-3.5" />
+                <span>Restablecer contraseña</span>
+              </Button>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+            <Link href="/registro" className="flex items-center text-sm hover:bg-white/10">
+              <User className="mr-2 h-4 w-4" />
               <span>Registrarse</span>
             </Link>
-          </DropdownMenuItem>
+            </DropdownMenuItem>
+            </>
+          )}
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
