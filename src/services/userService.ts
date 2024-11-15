@@ -55,6 +55,23 @@ const userService = {
       throw error;
     }
   },
+  resetPassword: async (email: string) => {
+    try {
+      const response = await fetch(`https://tp-final-bienal.onrender.com/password-reset`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to reset password');
+      }
+    } catch (error) {
+      console.error('Error during password reset:', error);
+      throw error;
+    }
+  },
 };
 
 export default userService;

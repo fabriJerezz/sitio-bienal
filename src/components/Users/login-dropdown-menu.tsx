@@ -27,6 +27,7 @@ import {
 } from '@/components/ui/form';
 import Link from 'next/link';
 import useUserStore from '@/store/userStore';
+import userService from '@/services/userService';
 
 const formSchema = z.object({
   username: z.string(),
@@ -36,16 +37,16 @@ const formSchema = z.object({
 });
 
 const resetPasswordSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-})
+  email: z.string().email({ message: 'Por favor, ingrese un email válido' }),
+});
 
 type FormValues = z.infer<typeof formSchema>;
-type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>
+type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
 
 export function LoginDropdownMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [isResetPassword, setIsResetPassword] = useState(false)
+  const [isResetPassword, setIsResetPassword] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -58,9 +59,9 @@ export function LoginDropdownMenu() {
   const resetPasswordForm = useForm<ResetPasswordFormValues>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
-      email: "",
+      email: '',
     },
-  })
+  });
 
   const userStore = useUserStore();
 
@@ -76,14 +77,21 @@ export function LoginDropdownMenu() {
     }
   };
 
-  const onResetPasswordSubmit = (values: ResetPasswordFormValues) => {
-    // Simulate password reset logic
-    console.log("Password reset requested for:", values.email);
-    setErrorMessage("Se ha enviado un mail para restablecer tu contraseña.");
-    setIsResetPassword(false);
-    // Keep the dropdown open
-    setIsOpen(true);
-  }
+  const onResetPasswordSubmit = async (values: ResetPasswordFormValues) => {
+    try {
+      await userService.resetPassword(values.email);
+      setIsResetPassword(false);
+      // Keep the dropdown open
+      setIsOpen(true);
+      // Reset the email field to be empty
+      resetPasswordForm.reset({ email: '' });
+    } catch (error) {
+      setErrorMessage('No se encontró un usuario con ese email');
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 2500);
+    }
+  };
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
@@ -92,7 +100,7 @@ export function LoginDropdownMenu() {
       setIsResetPassword(false);
       setErrorMessage(null);
     }
-  }
+  };
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={handleOpenChange}>
@@ -115,48 +123,93 @@ export function LoginDropdownMenu() {
         {!isResetPassword ? (
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-            <DropdownMenuLabel className="text-center text-lg font-bold">
-              Login
-            </DropdownMenuLabel>
+              <DropdownMenuLabel className="text-center text-lg font-bold">
+                Login
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup className="space-y-3 py-3">
+                {errorMessage && !isResetPassword && (
+                  <div className="text-red-500 text-sm text-center mb-2">
+                    {errorMessage}
+                  </div>
+                )}
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="flex items-center">
+                        <User className="mr-2 h-4 w-4" />
+                        Usuario o Email
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Ingresá tu usuario o email"
+                          {...field}
+                          className="text-sm bg-black/55 text-white border-white/20"
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="flex items-center">
+                        <Lock className="mr-2 h-4 w-4" />
+                        Contraseña
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="Ingresá tu contraseña"
+                          {...field}
+                          className="text-sm bg-black/55 text-white border-white/20"
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="submit"
+                  className="w-full text-sm py-1 bg-white/70 bg-opacity-85 text-black hover:bg-white"
+                >
+                  Ingresar
+                </Button>
+              </DropdownMenuGroup>
+            </form>
+          </Form>
+        ) : (
+          <Form {...resetPasswordForm}>
+          <form onSubmit={resetPasswordForm.handleSubmit(onResetPasswordSubmit)}>
+            <DropdownMenuLabel className="text-center text-lg font-bold">Reset Password</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup className="space-y-3 py-3">
-              {errorMessage && (
+              {errorMessage && isResetPassword && (
                 <div className="text-red-500 text-sm text-center mb-2">
                   {errorMessage}
                 </div>
               )}
               <FormField
-                control={form.control}
-                name="username"
+                control={resetPasswordForm.control}
+                name="email"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex items-center">
                       <User className="mr-2 h-4 w-4" />
-                      Usuario o Email
+                      Email
                     </FormLabel>
+                    {resetPasswordForm.formState.errors.email && isResetPassword && (
+                      <div className="text-red-500 text-sm text-left mb-2">
+                        {resetPasswordForm.formState.errors.email.message}
+                      </div>
+                    )}
                     <FormControl>
                       <Input
-                        placeholder="Ingresá tu usuario o email"
-                        {...field}
-                        className="text-sm bg-black text-white border-white/20"
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="flex items-center">
-                      <Lock className="mr-2 h-4 w-4" />
-                      Contraseña
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="Ingresá tu contraseña"
+                        placeholder="Enter your email"
                         {...field}
                         className="text-sm bg-black/55 text-white border-white/20"
                       />
@@ -164,46 +217,10 @@ export function LoginDropdownMenu() {
                   </FormItem>
                 )}
               />
-              <Button
-                type="submit"
-                className="w-full text-sm py-1 bg-white/70 bg-opacity-85 text-black hover:bg-white"
-              >
-                Ingresar
+              <Button type="submit" className="w-full text-sm py-1 bg-white/70 bg-opacity-85 text-black hover:bg-white">
+                Restablecer contraseña
               </Button>
             </DropdownMenuGroup>
-          </form>
-          </Form>
-        ) : (
-          <Form {...resetPasswordForm}>
-            <form onSubmit={resetPasswordForm.handleSubmit(onResetPasswordSubmit)}>
-              <DropdownMenuLabel className="text-center text-lg font-bold">Restablecer contraseña</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup className="space-y-3 py-3">
-                <FormField
-                  control={resetPasswordForm.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center">
-                        <Mail className="mr-2 h-4 w-4" /> Email
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Ingresá tu email"
-                          {...field}
-                          className="text-sm bg-black text-white border-white/20"
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                  />
-                  <Button
-                    type="submit"
-                    className="w-full text-sm py-1 bg-white/70 bg-opacity-85 text-black hover:bg-white"
-              >
-                  Restablecer contraseña
-                </Button>
-              </DropdownMenuGroup>
             </form>
           </Form>
         )}
@@ -211,24 +228,42 @@ export function LoginDropdownMenu() {
         <DropdownMenuGroup>
           {isResetPassword ? (
             <DropdownMenuItem asChild>
-                <Button variant="ghost" className="w-full text-sm py-1 bg-transparent text-opacity-85 text-white hover:bg-white" onClick={(e) => {e.preventDefault(); setIsResetPassword(false)}}>
-                  Volver al login
-                </Button>
+              <Button
+                variant="ghost"
+                className="w-full text-sm py-1 bg-transparent text-opacity-85 text-white hover:bg-white"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsResetPassword(false);
+                }}
+              >
+                Volver al login
+              </Button>
             </DropdownMenuItem>
           ) : (
             <>
-            <DropdownMenuItem asChild>
-              <Button variant="ghost" className="w-full text-sm flex justify-start py-1 bg-transparent text-opacity-85 text-white hover:bg-white" onClick={(e) => {e.preventDefault(); setIsResetPassword(true)}}>
-                <Lock className="mr-2 h-3.5 w-3.5" />
-                <span>Restablecer contraseña</span>
-              </Button>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-            <Link href="/registro" className="flex items-center text-sm hover:bg-white/10">
-              <User className="mr-2 h-4 w-4" />
-              <span>Registrarse</span>
-            </Link>
-            </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Button
+                  variant="ghost"
+                  className="w-full text-sm flex justify-start py-1 bg-transparent text-opacity-85 text-white hover:bg-white"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsResetPassword(true);
+                    setErrorMessage(null);
+                  }}
+                >
+                  <Lock className="mr-2 h-3.5 w-3.5" />
+                  <span>Restablecer contraseña</span>
+                </Button>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link
+                  href="/registro"
+                  className="flex items-center text-sm hover:bg-white/10"
+                >
+                  <User className="mr-2 h-4 w-4" />
+                  <span>Registrarse</span>
+                </Link>
+              </DropdownMenuItem>
             </>
           )}
         </DropdownMenuGroup>
