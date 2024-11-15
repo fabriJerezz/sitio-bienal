@@ -28,6 +28,7 @@ import {
 import Link from 'next/link';
 import useUserStore from '@/store/userStore';
 import userService from '@/services/userService';
+import ResetPassword from '@/app/restablecer-contrasena/page';
 
 const formSchema = z.object({
   username: z.string(),
@@ -73,7 +74,7 @@ export function LoginDropdownMenu() {
       setErrorMessage('Usuario o contraseña incorrectos');
       setTimeout(() => {
         setErrorMessage(null);
-      }, 2500);
+      }, 4000);
     }
   };
 
@@ -86,10 +87,11 @@ export function LoginDropdownMenu() {
       // Reset the email field to be empty
       resetPasswordForm.reset({ email: '' });
     } catch (error) {
-      setErrorMessage('No se encontró un usuario con ese email');
+      setErrorMessage(`No se encontró un usuario con el email ${values.email}`);
       setTimeout(() => {
         setErrorMessage(null);
-      }, 2500);
+      }, 4000);
+      resetPasswordForm.reset({ email: '' });
     }
   };
 
@@ -188,8 +190,8 @@ export function LoginDropdownMenu() {
             <DropdownMenuLabel className="text-center text-lg font-bold">Reset Password</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup className="space-y-3 py-3">
-              {errorMessage && isResetPassword && (
-                <div className="text-red-500 text-sm text-center mb-2">
+              {errorMessage && (
+                <div className="text-red-500 text-sm text-left mb-2">
                   {errorMessage}
                 </div>
               )}
@@ -202,7 +204,7 @@ export function LoginDropdownMenu() {
                       <User className="mr-2 h-4 w-4" />
                       Email
                     </FormLabel>
-                    {resetPasswordForm.formState.errors.email && isResetPassword && (
+                    {resetPasswordForm.formState.errors.email && (
                       <div className="text-red-500 text-sm text-left mb-2">
                         {resetPasswordForm.formState.errors.email.message}
                       </div>
