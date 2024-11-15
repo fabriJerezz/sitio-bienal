@@ -8,27 +8,30 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Event } from '@/types';
+import ConcreteEventCard from './ConcreteEventCard';
 
 interface CardEventsProps {
   events: Event[];
+  title: string;
+  description: string;
+  estado: string;
 }
 
-export default function EventsCard({ events }: CardEventsProps) {
+export default function EventsCard({
+  events,
+  title,
+  description,
+  estado,
+}: CardEventsProps) {
   return (
-    <div className="flex relative w-full h-screen bg-gradient-to-r from-gray-900 via-gray-700 to-black">
-      <div className="flex flex-col relative w-2/5 h-full  items-center justify-center">
-        <h1 className="items-center justify-center flex w-full text-white font-extrabold text-4xl ">
-          <div className="tracking-wide flex flex-col w-fit border-b-4 pb-1">
-            Proximos <span>Eventos</span>
-          </div>
+    <div className="flex relative w-4/5 h-64 bg-black rounded-xl shadow-lg overflow-hidden">
+      <div className="flex flex-col relative w-2/5 h-full items-center justify-center p-4 bg-gradient-to-r from-gray-800 to-black">
+        <h1 className="pb-2 border-b-4 border-white text-center text-white font-extrabold text-4xl">
+          {title}
         </h1>
-        <p className="text-white text-center mt-3">
-          Eventos que se realizaran
-          <br />
-          en las proximas fechas
-        </p>
+        <p className="text-white text-center mt-3">{description}</p>
       </div>
-      <div className="zonaSlider w-3/5 h-full  flex justify-center items-center ">
+      <div className="zonaSlider w-3/5 h-full flex justify-center items-center bg-gray-900">
         <Carousel
           opts={{
             align: 'start',
@@ -39,22 +42,22 @@ export default function EventsCard({ events }: CardEventsProps) {
             {events.map((event) => (
               <CarouselItem
                 key={event.id}
-                className="md:basis-1/2 lg:basis-1/3"
+                className="md:basis-1/2 lg:basis-1/3 px-5"
               >
-                <div className="flex flex-col w-full h-full items-center justify-center p-4 bg-white shadow-lg rounded-lg">
-                  <h1 className="text-4xl font-extrabold text-slate-900 mb-2">
-                    {event.nombre}
-                  </h1>
-                  <p className="text-slate-900 mb-1">{event.fecha_inicio}</p>
-                  <p className="text-slate-900 mb-1">{event.fecha_final}</p>
-                  <p className="text-slate-900">{event.descripcion}</p>
-                </div>
+                <ConcreteEventCard
+                  nombre={event.nombre}
+                  fecha_inicio={event.fecha_inicio}
+                  fecha_final={event.fecha_final}
+                  descripcion={event.descripcion}
+                  estado={estado}
+                  portada={event.portada}
+                />
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="flex justify-between mt-4">
-            <CarouselPrevious />
-            <CarouselNext />
+          <div className="flex justify-between mt-4 w-full px-4">
+            <CarouselPrevious className="text-white" />
+            <CarouselNext className="text-white" />
           </div>
         </Carousel>
       </div>

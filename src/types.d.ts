@@ -42,6 +42,8 @@ export declare interface Event {
   fecha_final: string;
   lugar: string;
   descripcion: string;
+  estado: string;
+  portada: string;
 }
 
 export declare interface Sculptor {
