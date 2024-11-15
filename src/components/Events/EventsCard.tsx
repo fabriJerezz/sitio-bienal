@@ -38,11 +38,11 @@ export default function EventsCard({
             loop: true,
           }}
         >
-          <CarouselContent>
+          <CarouselContent className="h-fit-content">
             {events.map((event) => (
               <CarouselItem
                 key={event.id}
-                className="md:basis-1/2 lg:basis-1/3 px-4"
+                className="md:basis-1/2 lg:basis-1/3 h-fit-content"
               >
                 <ConcreteEventCard
                   nombre={event.nombre}
