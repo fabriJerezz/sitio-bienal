@@ -18,7 +18,7 @@ export default function ConcreteEventCard({
   portada,
 }: ConcreteEventCardProps) {
   return (
-    <div className="gap-2 py-4 px-2 relative w-64 h-full rounded-lg overflow-hidden shadow-lg bg-gray-800 flex flex-col">
+    <div className="gap-1 py-2 px-2 relative w-64 h-full rounded-lg overflow-hidden shadow-lg bg-gray-800 flex flex-col">
       <div className="relative w-full px-6 flex-grow">
         <div className="font-bold text-2xl mb-2 text-white">{nombre}</div>
         <p className="text-gray-300 text-sm">{descripcion}</p>
@@ -29,6 +29,9 @@ export default function ConcreteEventCard({
         </span>
         <span className="text-gray-300 font-semibold">Fin: {fecha_final}</span>
       </div>
+      <button className="mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition duration-300">
+        Ver detalles
+      </button>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import EventsCard from '../../components/Events/EventsCard';
 import { Event } from '@/types';
+import Image from 'next/image';
 
 export default function Events() {
   const [events, setEvents] = useState<Event[]>([]);
@@ -50,8 +51,20 @@ export default function Events() {
   }, [events]);
 
   return (
-    <div className="bg-slate-400">
-      <header></header>
+    <div className="flex flex-col gap-12 bg-gray-950 pb-10">
+      <header className="flex flex-col justify-center items-center w-screen h-screen py-12 bg-gradient-to-r from-gray-800 to-black text-white text-center shadow-lg">
+        <Image
+          src={require('../../../public/imgs/B22-Slide-web-home-bg-1024x581.png')}
+          alt="background"
+          layout="fill"
+          objectFit="cover"
+          className="z-0"
+        />
+        <div className="z-10 flex flex-col">
+          <h1 className="text-7xl font-extrabold">Eventos</h1>
+          <p className="text-3xl mt-4">Descubre los mejores eventos</p>
+        </div>
+      </header>
 
       <div className="flex flex-col gap-10 justify-center items-center">
         <EventsCard

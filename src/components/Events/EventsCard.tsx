@@ -31,7 +31,7 @@ export default function EventsCard({
         </h1>
         <p className="text-white text-center mt-3">{description}</p>
       </div>
-      <div className="zonaSlider w-3/5 h-full flex justify-center items-center bg-gray-900">
+      <div className="zonaSlider w-3/5 h-full flex justify-center items-center bg-gray-600/5">
         <Carousel
           opts={{
             align: 'start',
@@ -42,7 +42,7 @@ export default function EventsCard({
             {events.map((event) => (
               <CarouselItem
                 key={event.id}
-                className="md:basis-1/2 lg:basis-1/3 px-5"
+                className="md:basis-1/2 lg:basis-1/3 px-4"
               >
                 <ConcreteEventCard
                   nombre={event.nombre}
