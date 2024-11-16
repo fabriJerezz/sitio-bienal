@@ -42,8 +42,9 @@ export declare interface Event {
   fecha_final: string;
   lugar: string;
   descripcion: string;
-  estado: string;
-  portada: string | File;
+  evento_en_transcurso: string;
+  foto1: string | File;
+  foto2: string | File;
 }
 
 export declare interface Sculptor {
@@ -60,18 +61,17 @@ export declare type NewSculptor = Omit<Sculptor, 'id'>;
 
 export declare type ModifiedSculptor = Partial<NewSculptor>;
 
-export declare interface Sculpture {
-  id: string | number;
-  title: string;
-  creationDate: string;
-  qrCode: string;
-  qrExpiration: {
-    date: string;
-    time: string;
-  };
+export declare interface Piece {
+  id: number;
+  titulo: string;
+  fecha_creacion: Date;
+  descripcion: string;
   material: string;
-  sculptorId: number;
-  eventId: number;
+  id_escultor: number;
+  id_evento: number;
+  foto1: File | null;
+  foto2: File | null;
+  votacion_en_transcurso: string;
 }
 
 export declare type NewSculpture = Omit<

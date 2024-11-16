@@ -1,29 +1,20 @@
 'use client';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
-interface Piece {
-  id: number;
-  titulo: string;
-  fecha_creacion: Date;
-  descripcion: string;
-  material: string;
-  id_escultor: number;
-  id_evento: number;
-  foto1: File | null;
-  foto2: File | null;
-  votacion_en_transcurso: string;
-}
+import { Piece, Event } from '@/types';
+import Image from 'next/image';
+import DownArrow from '@/components/ui/DownArrow';
 
 const EventoDetalle = () => {
   const { id } = useParams(); // Captura el parámetro dinámico
   const [pieces, setPieces] = useState<Piece[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
     const fetchPieces = async () => {
       let allPieces: Piece[] = [];
       let url = 'https://tp-final-bienal.onrender.com/api/obras/';
-      const idEvento = id; // Reemplaza esto con el ID del escultor que deseas filtrar
+      const idEvento = id;
 
       while (url) {
         const response = await fetch(url);
@@ -32,21 +23,82 @@ const EventoDetalle = () => {
           (piece: Piece) => piece.id_evento === Number(idEvento)
         );
         allPieces = [...allPieces, ...filteredPieces];
-        url = data.next; // Actualiza la URL para la siguiente página
+        url = data.next;
       }
 
       setPieces(allPieces);
     };
 
+    const fetchEvents = async () => {
+      let allEvents: Event[] = [];
+      let url = 'https://tp-final-bienal.onrender.com/api/eventos/';
+
+      while (url) {
+        const response = await fetch(url);
+        const data = await response.json();
+        allEvents = [...allEvents, ...data.results];
+        url = data.next; // Actualiza la URL para la siguiente página
+      }
+
+      setEvents(allEvents);
+    };
+
+    fetchEvents();
     fetchPieces();
   }, []);
 
   console.log(pieces);
 
+  const findEvent = (id: number) => {
+    return events.find((event) => event.id === id);
+  };
+
+  const Event = findEvent(Number(id));
+
+  console.log(Event);
+
   return (
-    <div>
-      <h1>Detalles del evento: {id}</h1>
-    </div>
+    <>
+      <div className="relative w-screen h-screen flex justify-center items-center flex-col bg-gradient-to-r from-black to-white">
+        <div className="flex flex-col bg-opacity-75 w-11/12 md:w-3/4 lg:w-1/2 justify-center items-center p-8 rounded-lg shadow-2xl">
+          <h1 className="text-8xl font-bold text-center text-white drop-shadow-lg">
+            {Event?.nombre}
+          </h1>
+          <p className="text-3xl text-white mt-4 text-center drop-shadow-md">
+            {Event?.descripcion}
+          </p>
+          <p className="text-2xl text-white mt-2 text-center drop-shadow-md">
+            {Event?.lugar}
+          </p>
+        </div>
+
+        <div className="mt-6 text-center flex flex-col items-center justify-center gap-5">
+          {Event?.evento_en_transcurso === 'En curso' && (
+            <>
+              <div className="text-4xl text-black font-bold animate-pulse bg-slate-100/55 py-3 px-2 rounded-lg">
+                ¡Vota ahora, el evento está activo!
+              </div>
+              <DownArrow />
+            </>
+          )}
+          {Event?.evento_en_transcurso === 'Finalizado' && (
+            <div className="text-4xl text-red-500 font-semibold">
+              El evento ha finalizado
+            </div>
+          )}
+          {Event?.evento_en_transcurso === 'Por iniciar' && (
+            <div className="text-4xl text-black font-semibold">
+              El evento está por arrancar
+              <span className="block mt-2 text-lg text-white">
+                Inicia el {Event.fecha_inicio}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="SectoObras"></div>
+    </>
   );
 };
 
