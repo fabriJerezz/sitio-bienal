@@ -12,9 +12,6 @@ export default function Header() {
     password: 'elfrontend12',
   };
 
-  useEffect(() => {
-    login(newUser);
-  }, []);
 
   console.log(user);
   return (

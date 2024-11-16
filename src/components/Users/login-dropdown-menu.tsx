@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { LogIn, Lock, User, Mail, ArrowLeft } from 'lucide-react';
+import { LogIn, Lock, User, Mail, ArrowLeft, CloudLightning } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -80,6 +80,7 @@ export function LoginDropdownMenu() {
 
   const onResetPasswordSubmit = async (values: ResetPasswordFormValues) => {
     try {
+      console.log('email', values.email);
       await userService.resetPassword(values.email);
       setIsResetPassword(false);
       // Keep the dropdown open
@@ -195,6 +196,11 @@ export function LoginDropdownMenu() {
                   {errorMessage}
                 </div>
               )}
+                {resetPasswordForm.formState.errors.email && (
+                  <div className="text-red-500 text-sm text-left mb-2">
+                    {resetPasswordForm.formState.errors.email.message}
+                  </div>
+                )}
               <FormField
                 control={resetPasswordForm.control}
                 name="email"
@@ -204,11 +210,6 @@ export function LoginDropdownMenu() {
                       <User className="mr-2 h-4 w-4" />
                       Email
                     </FormLabel>
-                    {resetPasswordForm.formState.errors.email && (
-                      <div className="text-red-500 text-sm text-left mb-2">
-                        {resetPasswordForm.formState.errors.email.message}
-                      </div>
-                    )}
                     <FormControl>
                       <Input
                         placeholder="Enter your email"
@@ -238,6 +239,7 @@ export function LoginDropdownMenu() {
                   setIsResetPassword(false);
                 }}
               >
+                <ArrowLeft className="mr-2 h-4 w-4" />
                 Volver al login
               </Button>
             </DropdownMenuItem>
@@ -251,6 +253,7 @@ export function LoginDropdownMenu() {
                     e.preventDefault();
                     setIsResetPassword(true);
                     setErrorMessage(null);
+                    resetPasswordForm.reset({ email: '' });
                   }}
                 >
                   <Lock className="mr-2 h-3.5 w-3.5" />
