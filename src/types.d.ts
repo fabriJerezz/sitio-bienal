@@ -69,8 +69,8 @@ export declare interface Piece {
   material: string;
   id_escultor: number;
   id_evento: number;
-  foto1: File | null;
-  foto2: File | null;
+  foto1: File | null | string;
+  foto2: File | null | string;
   votacion_en_transcurso: string;
 }
 

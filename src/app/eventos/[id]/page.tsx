@@ -3,6 +3,7 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Piece, Event } from '@/types';
 import Image from 'next/image';
+import { FocusCards } from '@/components/Obras/FocusCard';
 import DownArrow from '@/components/ui/DownArrow';
 
 const EventoDetalle = () => {
@@ -57,6 +58,16 @@ const EventoDetalle = () => {
 
   console.log(Event);
 
+  const mapObrasToCards = (pieces: Piece[]) => {
+    return pieces.map((piece) => ({
+      id: piece.id.toString(),
+      title: piece.titulo,
+      src: piece.foto1,
+    }));
+  };
+
+  const cards = mapObrasToCards(pieces);
+
   return (
     <>
       <div className="relative w-screen h-screen flex justify-center items-center flex-col bg-gradient-to-r from-black to-white">
@@ -97,7 +108,9 @@ const EventoDetalle = () => {
         </div>
       </div>
 
-      <div className="SectoObras"></div>
+      <div className="SectoObras mt-5 mb-5 flex justify-center items-center">
+        <FocusCards cards={cards} />
+      </div>
     </>
   );
 };
