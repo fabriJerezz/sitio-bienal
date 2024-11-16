@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface ConcreteEventCardProps {
   nombre: string;
@@ -29,9 +30,12 @@ export default function ConcreteEventCard({
         </span>
         <span className="text-gray-300 font-semibold">Fin: {fecha_final}</span>
       </div>
-      <button className="mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition duration-300">
+      <Link
+        href={`/eventos/${nombre}`}
+        className="text-center mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition duration-300"
+      >
         Ver detalles
-      </button>
+      </Link>
     </div>
   );
 }
