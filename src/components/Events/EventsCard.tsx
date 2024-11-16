@@ -46,6 +46,7 @@ export default function EventsCard({
                 className=" w-full  h-full justify-center items-center md:basis-1/2"
               >
                 <ConcreteEventCard
+                  id={event.id}
                   nombre={event.nombre}
                   fecha_inicio={event.fecha_inicio}
                   fecha_final={event.fecha_final}
