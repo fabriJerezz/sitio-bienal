@@ -15,22 +15,22 @@ const Page = () => {
   console.log('User', user);
 
   const postVote = async () => {
-    const url = `https://tp-final-bienal.onrender.com/vote/${pieceId}/${token}`;
+    const url = `https://tp-final-bienal.onrender.com/vote/${pieceId}/${token}/`;
     console.log('URL:', url);
     console.log('Token:', user?.token);
     console.log('Rating:', rating);
 
     try {
-      const response = await fetch(
-        `https://tp-final-bienal.onrender.com/vote/${pieceId}/${token}`,
-        {
-          method: 'POST',
-          body: `puntuacion:${rating}`,
-          headers: {
-            Authorization: `Token ${user?.token}`,
-          },
-        }
-      );
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Token ${user?.token}`,
+        },
+        body: JSON.stringify({
+          puntuacion: rating,
+        }),
+      });
 
       if (response.ok) {
         alert('Voto Registrado');
