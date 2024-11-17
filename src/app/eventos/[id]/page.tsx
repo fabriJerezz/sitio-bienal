@@ -5,6 +5,7 @@ import { Piece, Event } from '@/types';
 import Image from 'next/image';
 import { FocusCards } from '@/components/Obras/FocusCard';
 import DownArrow from '@/components/ui/DownArrow';
+import VoteQR from '@/components/lib/VoteQR';
 
 const EventoDetalle = () => {
   const { id } = useParams(); // Captura el parámetro dinámico
@@ -108,8 +109,9 @@ const EventoDetalle = () => {
         </div>
       </div>
 
-      <div className="SectoObras mt-5 mb-5 flex justify-center items-center">
+      <div className="SectoObras mt-5 mb-5 flex flex-col justify-center items-center">
         <FocusCards cards={cards} />
+        <VoteQR />
       </div>
     </>
   );
