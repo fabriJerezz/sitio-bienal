@@ -34,7 +34,7 @@ const Page: React.FC = () => {
       </h1>
       <Link
         href="/"
-        className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-110"
+        className="px-4 py-2 bg-black text-white rounded-lg shadow-lg hover:bg-gray-800 transition duration-300 ease-in-out transform hover:scale-110"
       >
         Volver a inicio
       </Link>
