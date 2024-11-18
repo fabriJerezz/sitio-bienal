@@ -3,8 +3,6 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { cn } from '@/components/lib/utils';
-import useUserStore from '@/store/userStore';
-import { set } from 'react-hook-form';
 import VoteQR from '../lib/VoteQR';
 
 const PopUp = ({
