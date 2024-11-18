@@ -38,8 +38,9 @@ const Page = () => {
             alert('Voto Registrado');
           } else {
             const errorData = await response.json();
-            console.error('Error en la respuesta:', errorData.error);
-            setError(errorData.error);
+            console.log(errorData.detail);
+            console.log('Error en la respuesta:', errorData.error);
+            setError(errorData.detail);
           }
         } catch (error) {
           console.error('Error:', error);
