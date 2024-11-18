@@ -6,6 +6,8 @@ const nextConfig = {
       "res.cloudinary.com",
       "images.unsplash.com",
       "assets.aceternity.com",
+      "media2.giphy.com",
+      "media1.giphy.com",
     ],
   },
 };

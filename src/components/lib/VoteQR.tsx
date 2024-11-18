@@ -26,7 +26,7 @@ export default function VoteQR({ rating, pieceId }: QRProps) {
 
   return (
     <div>
-      {token ? <QRCode value={url} /> : <p>Cargando token...</p>}
+      {token ? <QRCode value={url} /> : <p>Generando Codigo QR</p>}
 
       <Link href={url}>IR A LA RUTA</Link>
     </div>
