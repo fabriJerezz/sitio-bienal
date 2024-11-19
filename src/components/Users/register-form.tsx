@@ -108,11 +108,11 @@ export function RegisterFormComponent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-      <Card className="w-full max-w-xl bg-white bg-opacity-100 px-8 py-6 md:mt-8 transition-all duration-300">
+    <div className="min-h-screen bg-black flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+      <Card className="w-full max-w-xl bg-black bg-opacity-100 px-8 py-6 md:mt-8 transition-all duration-300 text-white">
         <CardHeader className="w-full">
-          <CardTitle className="text-2xl font-bold text-center bg-slate-400/90 py-2 w-full  rounded-lg">
-            Registrarse
+          <CardTitle className="text-2xl font-bold text-center bg-black py-2 w-full  rounded-lg ">
+            Sing Up Account
           </CardTitle>
         </CardHeader>
         {successMessage && (
@@ -279,7 +279,11 @@ export function RegisterFormComponent() {
                 />
               </div>
 
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
+              <Button
+                type="submit"
+                className="w-full bg-white text-black py-8 text-xl :hover:bg-black :hover:text-white"
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? 'Enviando...' : 'Registrarse'}
               </Button>
             </form>

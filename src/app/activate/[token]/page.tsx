@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 const Page: React.FC = () => {
   const { token } = useParams();
+  const [verified, setVerified] = useState(false);
   console.log(token);
 
   useEffect(() => {
@@ -19,6 +20,10 @@ const Page: React.FC = () => {
             },
           }
         );
+
+        if (response.ok) {
+          setVerified(true);
+        }
       } catch (error) {
         console.error('Error:', error);
       }
@@ -29,15 +34,25 @@ const Page: React.FC = () => {
 
   return (
     <div className="w-screen h-screen bg-gradient-to-r from-black via-gray-900 to-black text-white flex flex-col items-center justify-center space-y-6">
-      <h1 className="text-4xl font-extrabold mb-4 animate-pulse text-center w-1/2">
-        Cuenta Validada ya puede acceder a nuestra WEB
-      </h1>
-      <Link
-        href="/"
-        className="px-4 py-2 bg-black text-white rounded-lg shadow-lg hover:bg-gray-800 transition duration-300 ease-in-out transform hover:scale-110"
-      >
-        Volver a inicio
-      </Link>
+      {verified ? (
+        <>
+          <h1 className="text-4xl font-extrabold mb-4 animate-pulse text-center w-1/2">
+            Cuenta Validada ya puede acceder a nuestra WEB
+          </h1>
+          <Link
+            href="/"
+            className="px-4 py-2 bg-black text-white rounded-lg shadow-lg hover:bg-gray-800 transition duration-300 ease-in-out transform hover:scale-110"
+          >
+            Volver a inicio
+          </Link>
+        </>
+      ) : (
+        <>
+          <h1 className="text-4xl font-extrabold mb-4 animate-pulse text-center w-1/2">
+            Validando cuenta...
+          </h1>
+        </>
+      )}
     </div>
   );
 };
