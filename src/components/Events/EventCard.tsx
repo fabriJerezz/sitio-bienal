@@ -32,8 +32,8 @@ export default function EventCard({ event }: CardEventsProps) {
           className="rounded-lg"
         />
       </div>
-      <div className="seccionTexto w-1/3 flex items-center  justify-between p-4 rounded-lg">
-        <div className="flex flex-col  justify-center items-center p-2 rounded-lg">
+      <div className="seccionTexto w-1/3 flex items-center  justify-center p-4 rounded-lg ">
+        <div className="flex-start flex-col  justify-center items-center p-2 rounded-lg w-2/3">
           <h1 className="text-2xl font-bold mb-1">{event.nombre}</h1>
           <div className="flex items-center">
             <svg
@@ -59,14 +59,14 @@ export default function EventCard({ event }: CardEventsProps) {
           </div>
         </div>
         <span
-          className={`text-lg font-semibold ${getEventStatusClass(
+          className={`text-lg font-semibold items-center flex justify-center w-1/3 ${getEventStatusClass(
             event.evento_en_transcurso
           )}`}
         >
           {event.evento_en_transcurso}
         </span>
       </div>
-      <div className="seccionBotones w-1/3 flex flex-col justify-center items-center p-2">
+      <div className="seccionBotones w-1/3 flex  justify-center items-center p-2">
         <Link
           href={`eventos/${event.id}`}
           className="text-white hover:text-black hover:bg-white font-semibold py-2 px-4 border border-white rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"

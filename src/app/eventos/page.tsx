@@ -102,7 +102,7 @@ export default function Events() {
             id="filterDropdown"
             value={filter}
             onChange={handleFilterChange}
-            className="p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-2 rounded bg-white text-black border border-white focus:outline-none focus:ring-2 focus:ring-black"
           >
             <option value="all">Todos los eventos</option>
             <option value="upcoming">Próximos eventos</option>
@@ -115,28 +115,6 @@ export default function Events() {
           {filteredEvents().map((event) => EventCard({ event }))}
         </div>
       </div>
-
-      {/* 
-      <div className="flex flex-col gap-10 justify-center items-center">
-        <EventsCard
-          events={upComingEvents}
-          title="Próximos Eventos"
-          description="Los mejores eventos te esperan"
-          estado="Próximamente"
-        />
-        <EventsCard
-          events={currentEvents}
-          title="Eventos en Curso"
-          description="No te pierdas los eventos que están ocurriendo ahora"
-          estado="En Curso"
-        />
-        <EventsCard
-          events={pastEvents}
-          title="Eventos Terminados"
-          description="Revive los mejores momentos de eventos pasados"
-          estado="Terminados"
-        />
-      </div> */}
     </div>
   );
 }
