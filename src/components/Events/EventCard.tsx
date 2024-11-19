@@ -21,11 +21,12 @@ const getEventStatusClass = (status: string) => {
 };
 
 export default function EventCard({ event }: CardEventsProps) {
+  console.log('event', event);
   return (
     <div className="w-full border-t-2 border-white relative flex text-white p-4">
       <div className="seccionTituloPortada w-1/3 flex relative justify-center items-center p-2">
         <Image
-          src={`https://res.cloudinary.com/dq1vfo4c8/${event.foto1}`}
+          src={`https://res.cloudinary.com/dq1vfo4c8/${event.foto1}/`}
           alt={event.nombre}
           layout="fill"
           objectFit="cover"

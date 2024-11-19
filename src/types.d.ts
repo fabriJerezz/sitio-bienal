@@ -43,8 +43,8 @@ export declare interface Event {
   lugar: string;
   descripcion: string;
   evento_en_transcurso: string;
-  foto1: string | File;
-  foto2: string | File;
+  foto1: string | File | null;
+  foto2: string | File | null;
 }
 
 export declare interface Sculptor {

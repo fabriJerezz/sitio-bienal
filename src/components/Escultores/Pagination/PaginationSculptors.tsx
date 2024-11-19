@@ -26,6 +26,8 @@ const EscultoresList = () => {
   const [prevPage, setPrevPage] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
+  console.log('escultores', escultores);
+
   useEffect(() => {
     fetchEscultores('https://tp-final-bienal.onrender.com/api/escultores/');
   }, []);

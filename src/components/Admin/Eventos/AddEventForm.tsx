@@ -4,6 +4,7 @@ import useUserStore from '@/store/userStore';
 
 const AddEventForm: React.FC = () => {
   const { user } = useUserStore();
+  const [image, setImage] = useState<string>('');
   const [formData, setFormData] = useState<Event>({
     id: 0,
     nombre: '',
@@ -11,8 +12,9 @@ const AddEventForm: React.FC = () => {
     fecha_final: '',
     lugar: '',
     descripcion: '',
-    estado: '',
-    portada: '',
+    foto1: null,
+    foto2: null,
+    evento_en_transcurso: '',
   });
 
   const handleChange = (
@@ -26,10 +28,16 @@ const AddEventForm: React.FC = () => {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
       setFormData({
         ...formData,
-        portada: e.target.files[0],
+        [e.target.name]: file,
       });
     }
   };
@@ -40,7 +48,7 @@ const AddEventForm: React.FC = () => {
     const data = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
       if (value !== null) {
-        if (key === 'portada' && value instanceof File) {
+        if (value instanceof File) {
           data.append(key, value);
         } else {
           data.append(key, value.toString());
@@ -69,8 +77,9 @@ const AddEventForm: React.FC = () => {
           fecha_final: '',
           lugar: '',
           descripcion: '',
-          estado: '',
-          portada: '',
+          foto1: null,
+          foto2: null,
+          evento_en_transcurso: '',
         });
       } else {
         const errorData = await response.json();
@@ -132,7 +141,14 @@ const AddEventForm: React.FC = () => {
         />
         <input
           type="file"
-          name="portada"
+          name="foto1"
+          onChange={handleFileChange}
+          accept="image/*"
+          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          type="file"
+          name="foto2"
           onChange={handleFileChange}
           accept="image/*"
           className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
