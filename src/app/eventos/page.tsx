@@ -12,25 +12,31 @@ export default function Events() {
   const [currentEvents, setCurrentEvents] = useState<Event[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filter, setFilter] = useState<string>('all');
+  const [nextPageUrl, setNextPageUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchEvents = async () => {
-      let allEvents: Event[] = [];
-      let url = `https://tp-final-bienal.onrender.com/api/eventos/?search=${searchTerm}`;
-
-      while (url) {
-        const response = await fetch(url);
-        const data = await response.json();
-        allEvents = [...allEvents, ...data.results];
-        url = data.next; // Actualiza la URL para la siguiente página
-      }
-
-      setEvents(allEvents);
-      categorizeEvents(allEvents);
+      const url = `https://tp-final-bienal.onrender.com/api/eventos/?search=${searchTerm}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setEvents(data.results);
+      categorizeEvents(data.results);
+      setNextPageUrl(data.next); // Guardar la URL para la siguiente página
     };
 
     fetchEvents();
   }, [searchTerm]);
+
+  const fetchMoreEvents = async () => {
+    if (nextPageUrl) {
+      const response = await fetch(nextPageUrl);
+      const data = await response.json();
+      const newEvents = data.results;
+      setEvents((prevEvents) => [...prevEvents, ...newEvents]);
+      categorizeEvents([...events, ...newEvents]);
+      setNextPageUrl(data.next);
+    }
+  };
 
   const categorizeEvents = (events: Event[]) => {
     const now = new Date();
@@ -114,6 +120,15 @@ export default function Events() {
         <div className="w-full justify-center items-center">
           {filteredEvents().map((event) => EventCard({ event }))}
         </div>
+
+        {nextPageUrl && (
+          <button
+            onClick={fetchMoreEvents}
+            className="text-white hover:text-black hover:bg-white font-semibold py-2 px-4 border border-white rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+          >
+            Ver mas
+          </button>
+        )}
       </div>
     </div>
   );
