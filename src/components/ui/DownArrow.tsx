@@ -6,7 +6,7 @@ const DownArrow: React.FC = () => (
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth="1.5"
-    stroke="currentColor"
+    stroke="white"
     className="size-20"
   >
     <path

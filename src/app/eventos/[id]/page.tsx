@@ -61,6 +61,7 @@ const EventoDetalle = () => {
     return pieces.map((piece) => ({
       id: piece.id.toString(),
       title: piece.titulo,
+      description: piece.descripcion,
       src: piece.foto1,
     }));
   };
@@ -69,7 +70,7 @@ const EventoDetalle = () => {
 
   return (
     <>
-      <div className="relative w-screen h-screen flex justify-center items-center flex-col bg-gradient-to-r from-black to-white">
+      <div className="relative w-screen h-screen flex justify-center items-center flex-col bg-black">
         <div className="flex flex-col bg-opacity-75 w-11/12 md:w-3/4 lg:w-1/2 justify-center items-center p-8 rounded-lg shadow-2xl">
           <h1 className="text-8xl font-bold text-center text-white drop-shadow-lg">
             {Event?.nombre}
@@ -82,10 +83,10 @@ const EventoDetalle = () => {
           </p>
         </div>
 
-        <div className="mt-6 text-center flex flex-col items-center justify-center gap-5">
+        <div className=" text-center flex flex-col items-center justify-center gap-5 w-full">
           {Event?.evento_en_transcurso === 'En curso' && (
             <>
-              <div className="text-4xl text-black font-bold animate-pulse bg-slate-100/55 py-3 px-2 rounded-lg">
+              <div className="text-4xl w-full text-black font-bold animate-pulse bg-white py-3 px-2 rounded-lg">
                 ¡Vota ahora, el evento está activo!
               </div>
               <DownArrow />
