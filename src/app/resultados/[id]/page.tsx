@@ -57,7 +57,7 @@ export default function Page() {
       <h1 className="text-3xl font-extrabold text-white mb-6">
         Resultados del evento
       </h1>
-      <div className="  w-3/4 bg-white shadow-lg rounded-lg p-4 object-cover">
+      <div className="  w-1/2 bg-white shadow-lg rounded-lg p-4 object-cover">
         {data.detail === 'No hay votaciones para este evento' ? (
           <p className="text-center text-red-500">
             No hay votaciones para este evento

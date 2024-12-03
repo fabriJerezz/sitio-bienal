@@ -41,7 +41,7 @@ export function CarouselSculptors() {
     fetchSculptors().then(setSculptors);
   }, []);
 
-  console.log(sculptors);
+  // console.log(sculptors);
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4">
