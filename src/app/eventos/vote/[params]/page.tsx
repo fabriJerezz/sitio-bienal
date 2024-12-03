@@ -35,7 +35,6 @@ const Page = () => {
 
           if (response.ok) {
             setConfirmVote(true);
-            alert('Voto Registrado');
           } else {
             const errorData = await response.json();
             console.log(errorData.detail);
