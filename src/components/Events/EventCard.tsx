@@ -21,12 +21,16 @@ const getEventStatusClass = (status: string) => {
 };
 
 export default function EventCard({ event }: CardEventsProps) {
+  const imageUrl = `https://res.cloudinary.com/dq1vfo4c8/${event.foto1}`;
   console.log('event', event);
+  console.log('event.foto1', event.foto1);
+  console.log('imageUrl', imageUrl); // Agrega este console.log para verificar la URL
+
   return (
     <div className="w-full border-t-2 border-white relative flex text-white p-4">
       <div className="seccionTituloPortada w-1/3 flex relative justify-center items-center p-2">
         <Image
-          src={`https://res.cloudinary.com/dq1vfo4c8/${event.foto1}/`}
+          src={imageUrl}
           alt={event.nombre}
           layout="fill"
           objectFit="cover"
@@ -67,12 +71,18 @@ export default function EventCard({ event }: CardEventsProps) {
           {event.evento_en_transcurso}
         </span>
       </div>
-      <div className="seccionBotones w-1/3 flex  justify-center items-center p-2">
+      <div className="seccionBotones w-1/3 flex  justify-center items-center p-2 gap-3">
         <Link
           href={`eventos/${event.id}`}
           className="text-white hover:text-black hover:bg-white font-semibold py-2 px-4 border border-white rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
         >
           Ver detalles
+        </Link>
+        <Link
+          href={`resultados/${event.id}`}
+          className='className="text-white hover:text-black hover:bg-white font-semibold py-2 px-4 border border-white rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105'
+        >
+          Ver resultados
         </Link>
       </div>
     </div>
