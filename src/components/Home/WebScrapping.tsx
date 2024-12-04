@@ -4,11 +4,15 @@ import { set } from 'react-hook-form';
 import { New } from '../../types';
 import NewCard from './NewCard';
 import { GralCarousel } from './GralCarousel';
+import { Oswald } from 'next/font/google';
+
+const oswald = Oswald({ subsets: ['latin'] });
 
 function WebScrapping() {
   const [news, setNews] = useState<New[]>([]); //
   const [artirsts, setArtists] = useState([]); //
   const [auctions, setAuctions] = useState([]); //
+
   async function fetchNotices() {
     try {
       const response = await fetch(
@@ -56,13 +60,16 @@ function WebScrapping() {
   console.log('Subastas', auctions);
 
   return (
-    <section className="relative flex w-full justify-center flex-col bg-black text-white">
+    <section
+      className={`relative flex w-full justify-center flex-col bg-black text-white ${oswald.className}`}
+    >
       <h1 className="text-white text-6xl w-full text-center mb-6 mt-6">
         Ultimas Noticias
       </h1>
-      <div className="w-full flex justify-center bg-white text-black pt-10">
+      <div className="w-full flex justify-center bg-white text-black pt-10 pb-10 ">
         <GralCarousel array={news} />
       </div>
+      <div className="bg-black h-32"></div>
     </section>
   );
 }

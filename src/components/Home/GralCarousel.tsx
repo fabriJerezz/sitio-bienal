@@ -21,11 +21,14 @@ export function GralCarousel({ array }: GralCarouselProps) {
         align: 'start',
         loop: true,
       }}
-      className="w-3/4 h-screen"
+      className="w-3/4 "
     >
-      <CarouselContent className=" h-full flex ">
+      <CarouselContent className="  flex ">
         {array.map((item, index) => (
-          <CarouselItem key={index} className=" basis-1/3  flex justify-center">
+          <CarouselItem
+            key={index}
+            className=" lg:basis-1/3 md:basis-1/2 flex justify-center"
+          >
             <div>
               {(() => {
                 if (
