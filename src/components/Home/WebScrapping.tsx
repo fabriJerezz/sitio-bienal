@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { set } from 'react-hook-form';
+import { New } from '../../types';
+import NewCard from './NewCard';
+import { GralCarousel } from './GralCarousel';
 
 function WebScrapping() {
-  const [news, setNews] = useState([]); //
+  const [news, setNews] = useState<New[]>([]); //
   const [artirsts, setArtists] = useState([]); //
   const [auctions, setAuctions] = useState([]); //
   async function fetchNotices() {
@@ -52,7 +55,16 @@ function WebScrapping() {
   console.log('Artistas', artirsts);
   console.log('Subastas', auctions);
 
-  return <div>WebScrapping</div>;
+  return (
+    <section className="relative flex w-full justify-center flex-col bg-black text-white">
+      <h1 className="text-white text-6xl w-full text-center mb-6 mt-6">
+        Ultimas Noticias
+      </h1>
+      <div className="w-full flex justify-center bg-white text-black pt-10">
+        <GralCarousel array={news} />
+      </div>
+    </section>
+  );
 }
 
 export default WebScrapping;

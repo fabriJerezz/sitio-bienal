@@ -13,6 +13,32 @@ export declare interface UserReturnedData {
   staff: boolean;
 }
 
+export declare interface New {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+}
+
+export declare interface Auction {
+  id: number;
+  title: string;
+  author: string;
+  price: string;
+  image: string;
+  url: string;
+}
+
+export declare interface Artist {
+  id: number;
+  title: string;
+  about: string;
+  date: string;
+  url: string;
+  image: string;
+}
+
 export declare interface UserRegistration {
   user: {
     username: string;

@@ -8,6 +8,8 @@ const nextConfig = {
       "assets.aceternity.com",
       "media2.giphy.com",
       "media1.giphy.com",
+      "static.labiennale.org",
+      "www.infodesigners.eu"
     ],
   },
 };
