@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { set } from 'react-hook-form';
 import { New } from '../../types';
-import NewCard from './NewCard';
 import { GralCarousel } from './GralCarousel';
 import { Oswald } from 'next/font/google';
 
@@ -69,7 +68,10 @@ function WebScrapping() {
       <div className="w-full flex justify-center bg-white text-black pt-10 pb-10 ">
         <GralCarousel array={news} />
       </div>
-      <div className="bg-black h-32"></div>
+      <h1 className="text-white text-6xl w-full  mb-6 mt-6">Subastas</h1>
+      <div className="w-full flex justify-center bg-white text-black pt-10 pb-10 ">
+        <GralCarousel array={auctions} />
+      </div>
     </section>
   );
 }

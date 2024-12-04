@@ -9,7 +9,8 @@ const nextConfig = {
       "media2.giphy.com",
       "media1.giphy.com",
       "static.labiennale.org",
-      "www.infodesigners.eu"
+      "www.infodesigners.eu",
+      "www.christies.com",
     ],
   },
 };
