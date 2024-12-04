@@ -7,7 +7,7 @@ import {
 } from '@/components/shadcn/Carousel';
 import { New, Auction, Artist } from '../../types';
 import NewCard from './NewCard';
-// import ArtistCard from './ArtistCard';
+import ArtistCard from './ArtistCard';
 import AuctionCard from './AuctionCard';
 
 interface GralCarouselProps {
@@ -39,8 +39,15 @@ export function GralCarousel({ array }: GralCarouselProps) {
                   'url' in item
                 ) {
                   return <NewCard news={item as New} />;
-                } else if ('artistProperty' in item) {
-                  // return <ArtistCard artist={item as Artist} />;
+                } else if (
+                  'id' in item &&
+                  'title' in item &&
+                  'date' in item &&
+                  'about' in item &&
+                  'image' in item &&
+                  'url' in item
+                ) {
+                  return <ArtistCard artist={item as Artist} />;
                 } else if (
                   'id' in item &&
                   'title' in item &&

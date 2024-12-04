@@ -11,6 +11,7 @@ const nextConfig = {
       "static.labiennale.org",
       "www.infodesigners.eu",
       "www.christies.com",
+      "www.artnews.com"
     ],
   },
 };

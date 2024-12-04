@@ -30,7 +30,7 @@ export default function AuctionCard({ auction }: AuctionCardProps) {
       />
       <div className="flex flex-col flex-grow">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-primary">
+          <CardTitle className="text-2xl font-bold text-white/50">
             {auction.title}
           </CardTitle>
           <CardDescription className="flex items-center space-x-2 text-sm text-muted-foreground">
