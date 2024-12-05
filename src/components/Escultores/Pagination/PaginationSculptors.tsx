@@ -22,7 +22,7 @@ const EscultoresList: React.FC = () => {
   useEffect(() => {
     fetchEscultores('https://tp-final-bienal.onrender.com/api/escultores/');
   }, []);
-  
+
   const fetchEscultores = async (url: string) => {
     try {
       const res = await fetch(url);
@@ -35,8 +35,18 @@ const EscultoresList: React.FC = () => {
     }
   };
 
+  const fetchMoreEvents = async () => {
+    if (nextPage) {
+      const response = await fetch(nextPage);
+      const data = await response.json();
+      const newEscultores = data.results;
+      setEscultores((prevEscultores) => [...prevEscultores, ...newEscultores]);
+      setNextPage(data.next);
+    }
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-screen">
       {escultores.map((escultor) => (
         <FlipCards
           key={escultor.id}
@@ -44,11 +54,23 @@ const EscultoresList: React.FC = () => {
           name={`${escultor.nombre} ${escultor.apellido}`}
           location={escultor.nacionalidad}
           frontImage={escultor.foto_perfil || 'https://via.placeholder.com/300'}
-          backImage={escultor.obra_principal || 'https://via.placeholder.com/300'}
+          backImage={
+            escultor.obra_principal || 'https://via.placeholder.com/300'
+          }
         />
       ))}
+      <div className="flex w-screen justify-center">
+        {nextPage && (
+          <button
+            onClick={fetchMoreEvents}
+            className="bg-white text-black p-2 rounded-md m-2"
+          >
+            Ver más
+          </button>
+        )}
+      </div>
     </div>
   );
 };
 
-export default EscultoresList; 
+export default EscultoresList;
