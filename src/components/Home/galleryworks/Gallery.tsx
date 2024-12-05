@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { Piece } from '@/types';
 import img1 from '../../../../public/imgs/esc1.jpg';
 import img2 from '../../../../public/imgs/esc2.jpg';
 import img3 from '../../../../public/imgs/esc3.jpg';
@@ -8,6 +10,24 @@ import img5 from '../../../../public/imgs/esc5.jpg';
 import img6 from '../../../../public/imgs/esc6.jpg';
 
 const Gallery = () => {
+  const [pieces, setPieces] = useState<Piece[]>([]);
+
+  const fetchObras = async (url: string) => {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    try {
+      setPieces(data.results);
+      console.log(data.results);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchObras('https://tp-final-bienal.onrender.com/api/obras');
+  }, []);
+
   return (
     <div className="relative w-screen h-screen flex flex-col bg-black overflow-hidden">
       <div className="inline-flex flex-col p-1 border-white border-right mt-5  ml-5">
