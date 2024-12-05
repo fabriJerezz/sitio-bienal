@@ -27,6 +27,7 @@ import { UserRegistration } from '@/types';
 import { useRouter } from 'next/navigation';
 import keysToSnakeCase from '@/utils/toSnakeCase';
 
+
 const countries = [
   { code: 'AR', name: 'Argentina', flag: '🇦🇷' },
   { code: 'BR', name: 'Brasil', flag: '🇧🇷' },
@@ -115,16 +116,18 @@ export function RegisterFormComponent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-      <Card className="w-full max-w-xl bg-white bg-opacity-100 px-8 py-6 md:mt-8 transition-all duration-300">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">
-            Registrarse
+    <div className="min-h-screen bg-black flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+      <Card className="w-full max-w-xl bg-black bg-opacity-100 px-8 py-6 md:mt-8 transition-all duration-300 text-white">
+        <CardHeader className="w-full">
+          <CardTitle className="text-2xl font-bold text-center bg-black py-2 w-full  rounded-lg ">
+            Sing Up Account
           </CardTitle>
         </CardHeader>
+
         {successMessage && <p className="text-green-500 text-opacity-85 mb-4 text-start ml-6">{successMessage}</p>}
         {infoMessage && <p className="text-blue-800 text-opacity-75 mb-4 text-start ml-6">{infoMessage}</p>}
         {errorMessage && <p className="text-red-500 text-opacity-85 mb-4 text-start ml-6">{errorMessage}</p>}
+        
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -134,7 +137,7 @@ export function RegisterFormComponent() {
                   name="firstName"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>Nombre</FormLabel>
+                      <FormLabel className="tracking-wider">Nombre</FormLabel>
                       <FormControl>
                         <Input placeholder="Ingrese su nombre" {...field} />
                       </FormControl>
@@ -147,7 +150,7 @@ export function RegisterFormComponent() {
                   name="lastName"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>Apellido</FormLabel>
+                      <FormLabel className="tracking-wider">Apellido</FormLabel>
                       <FormControl>
                         <Input placeholder="Ingrese su apellido" {...field} />
                       </FormControl>
@@ -163,7 +166,9 @@ export function RegisterFormComponent() {
                   name="birthdate"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>Fecha de nacimiento</FormLabel>
+                      <FormLabel className="tracking-wider">
+                        Fecha de nacimiento
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="date"
@@ -181,7 +186,7 @@ export function RegisterFormComponent() {
                   name="country"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>País</FormLabel>
+                      <FormLabel className="tracking-wider">País</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
@@ -277,7 +282,11 @@ export function RegisterFormComponent() {
                 />
               </div>
 
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
+              <Button
+                type="submit"
+                className="w-full bg-white text-black py-8 text-xl :hover:bg-black :hover:text-white"
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? 'Enviando...' : 'Registrarse'}
               </Button>
             </form>

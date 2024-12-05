@@ -13,6 +13,32 @@ export declare interface UserReturnedData {
   staff: boolean;
 }
 
+export declare interface New {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+}
+
+export declare interface Auction {
+  id: number;
+  title: string;
+  author: string;
+  price: string;
+  image: string;
+  url: string;
+}
+
+export declare interface Artist {
+  id: number;
+  title: string;
+  about: string;
+  date: string;
+  url: string;
+  image: string;
+}
+
 export declare interface UserRegistration {
   user: {
     username: string;
@@ -35,6 +61,18 @@ declare interface UserStore {
   logout: () => void;
 }
 
+export declare interface Event {
+  id: number;
+  nombre: string;
+  fecha_inicio: string;
+  fecha_final: string;
+  lugar: string;
+  descripcion: string;
+  evento_en_transcurso: string;
+  foto1: string | File | null;
+  foto2: string | File | null;
+}
+
 export declare interface Sculptor {
   id: string | number;
   name: string;
@@ -49,18 +87,17 @@ export declare type NewSculptor = Omit<Sculptor, 'id'>;
 
 export declare type ModifiedSculptor = Partial<NewSculptor>;
 
-export declare interface Sculpture {
-  id: string | number;
-  title: string;
-  creationDate: string;
-  qrCode: string;
-  qrExpiration: {
-    date: string;
-    time: string;
-  };
+export declare interface Piece {
+  id: number;
+  titulo: string;
+  fecha_creacion: Date;
+  descripcion: string;
   material: string;
-  sculptorId: number;
-  eventId: number;
+  id_escultor: number;
+  id_evento: number;
+  foto1: File | null | string;
+  foto2: File | null | string;
+  votacion_en_transcurso: string;
 }
 
 export declare type NewSculpture = Omit<

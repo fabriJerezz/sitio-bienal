@@ -28,7 +28,6 @@ const fetchSculptors = async () => {
     const data = await response.json();
 
     return data.results;
-
   } catch (error) {
     console.error('Failed to fetch sculptors:', error);
     return [];
@@ -42,7 +41,7 @@ export function CarouselSculptors() {
     fetchSculptors().then(setSculptors);
   }, []);
 
-  console.log(sculptors);
+  // console.log(sculptors);
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4">
@@ -65,7 +64,7 @@ export function CarouselSculptors() {
                     key={sculptor.id}
                     country={sculptor.nacionalidad}
                     name={sculptor.nombre}
-                    img={sculptor.imagen}
+                    img={`https://res.cloudinary.com/dq1vfo4c8/${sculptor.foto_perfil}`}
                     mov={sculptor.movimiento}
                     history={sculptor.historia}
                     province={sculptor.nacionalidad}

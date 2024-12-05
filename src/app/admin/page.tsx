@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useUserStore } from '@/store/userStore';
+import useUserStore from '@/store/userStore';
 import UserProfile from '@/components/Admin/UserProfile';
 
 const Admin = () => {
@@ -10,8 +10,8 @@ const Admin = () => {
   const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
-    console.log(`User:`,user);
-    if (user?.staff === false || user === null) {
+    console.log(`User:`, user);
+    if (!user || !user.staff) {
       router.push('/unauthorized');
     } else {
       fetch('https://tp-final-bienal.onrender.com/profile/', {
@@ -24,7 +24,6 @@ const Admin = () => {
         .catch((error) => console.error('Error fetching profile data:', error));
     }
   }, [user, router]);
-
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 p-6">

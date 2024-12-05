@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { useUserStore } from '@/store/userStore';
+import useUserStore from '@/store/userStore';
 
 const AddSculptorForm = () => {
   const { user } = useUserStore();
