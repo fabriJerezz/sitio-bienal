@@ -4,6 +4,7 @@ import { set } from 'react-hook-form';
 import { New } from '../../types';
 import { GralCarousel } from './GralCarousel';
 import { Oswald } from 'next/font/google';
+import { WavyBackground } from './ui/WaveBackGround';
 
 const oswald = Oswald({ subsets: ['latin'] });
 
@@ -65,15 +66,18 @@ function WebScrapping() {
       <h1 className="text-white text-6xl w-full text-center mb-6 mt-6">
         Ultimas Noticias
       </h1>
-      <div className="w-full flex justify-center bg-black text-black pt-10 pb-10 ">
-        <GralCarousel array={news} />
-      </div>
+      <WavyBackground className="w-full">
+        <div className="w-full flex justify-center bg-transparent text-black pt-10 pb-10 ">
+          <GralCarousel array={news} />
+        </div>
+      </WavyBackground>
+
       <h1 className="text-white text-6xl w-full  mb-6 mt-6">Subastas</h1>
-      <div className="w-full flex justify-center bg-black text-black pt-10 pb-10 ">
+      <div className="w-full flex justify-center bg-transparent text-black pt-10 pb-10 ">
         <GralCarousel array={auctions} />
       </div>
       <h1 className="text-white text-6xl w-full  mb-6 mt-6">Artistas</h1>
-      <div className="w-full flex justify-center bg-black text-black pt-10 pb-10 ">
+      <div className="w-full flex justify-center bg-transparent text-black pt-10 pb-10 ">
         <GralCarousel array={artirsts} />
       </div>
     </section>
