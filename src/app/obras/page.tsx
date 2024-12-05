@@ -58,15 +58,16 @@ export function FocusCardsDemo() {
 
   return (
     <>
-      <div className="bg-slate-900 h-screen">
+      <div className="bg-slate-900 relative ">
         <header className="w-full pt-16 pb-5 flex justify-between px-20">
           <h1 className="text-white text-3xl ">
-            <span className="font-bold">Nuestas</span> Piezas
+            <span className="font-bold">Nuestras</span> Piezas
           </h1>
           {/* <PieceFilter /> */}
         </header>
-        <FocusCards cards={cards} />
-
+        <div className="relative">
+          <FocusCards cards={cards} />
+        </div>
         <div className="flex justify-center mt-5 space-x-6">
           <button
             onClick={handlePrevPage}
