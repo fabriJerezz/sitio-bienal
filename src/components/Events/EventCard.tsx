@@ -8,27 +8,26 @@ interface CardEventsProps {
 }
 
 const getEventStatusClass = (status: string) => {
+  const baseClasses =
+    'font-bold py-1 px-3 rounded-full text-center w-full md:w-auto md:text-sm text-center';
   switch (status) {
     case 'En curso':
-      return 'bg-green-100 text-green-800 font-bold py-1 px-3 rounded-full';
+      return `${baseClasses} bg-green-100 text-green-800 w-full h-full `;
     case 'Finalizado':
-      return 'bg-red-100 text-red-800 font-bold py-1 px-3 rounded-full';
+      return `${baseClasses} bg-red-100 text-red-800 w-full h-full`;
     case 'Por iniciar':
-      return 'bg-yellow-100 text-yellow-800 font-bold py-1 px-3 rounded-full';
+      return `${baseClasses} bg-yellow-100 text-yellow-800 w-full h-full`;
     default:
-      return '';
+      return baseClasses;
   }
 };
 
 export default function EventCard({ event }: CardEventsProps) {
   const imageUrl = `https://res.cloudinary.com/dq1vfo4c8/${event.foto1}`;
-  console.log('event', event);
-  console.log('event.foto1', event.foto1);
-  console.log('imageUrl', imageUrl); // Agrega este console.log para verificar la URL
 
   return (
-    <div className="w-full border-t-2 border-white relative flex text-white p-4">
-      <div className="seccionTituloPortada w-1/3 flex relative justify-center items-center p-2">
+    <div className="w-full border-t-2 border-white relative flex flex-col md:flex-row text-white p-4 ">
+      <div className="seccionTituloPortada w-full md:w-1/3 flex relative justify-center items-center p-2">
         <Image
           src={imageUrl}
           alt={event.nombre}
@@ -37,8 +36,8 @@ export default function EventCard({ event }: CardEventsProps) {
           className="rounded-lg"
         />
       </div>
-      <div className="seccionTexto w-1/3 flex items-center  justify-center p-4 rounded-lg ">
-        <div className="flex-start flex-col  justify-center items-center p-2 rounded-lg w-2/3">
+      <div className="seccionTexto w-full md:w-1/3 flex items-center justify-center p-4 rounded-lg">
+        <div className="flex flex-col justify-center items-center p-2 rounded-lg w-full md:w-2/3">
           <h1 className="text-2xl font-bold mb-1">{event.nombre}</h1>
           <div className="flex items-center">
             <svg
@@ -64,14 +63,14 @@ export default function EventCard({ event }: CardEventsProps) {
           </div>
         </div>
         <span
-          className={`text-lg font-semibold items-center flex justify-center w-1/3 ${getEventStatusClass(
+          className={`text-lg font-semibold items-center flex justify-center object-contain w-full md:w-1/3 ${getEventStatusClass(
             event.evento_en_transcurso
           )}`}
         >
           {event.evento_en_transcurso}
         </span>
       </div>
-      <div className="seccionBotones w-1/3 flex  justify-center items-center p-2 gap-3">
+      <div className="seccionBotones w-full md:w-1/3 flex justify-center items-center p-2 gap-3">
         <Link
           href={`eventos/${event.id}`}
           className="text-white hover:text-black hover:bg-white font-semibold py-2 px-4 border border-white rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
@@ -80,7 +79,7 @@ export default function EventCard({ event }: CardEventsProps) {
         </Link>
         <Link
           href={`resultados/${event.id}`}
-          className='className="text-white hover:text-black hover:bg-white font-semibold py-2 px-4 border border-white rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105'
+          className="text-white hover:text-black hover:bg-white font-semibold py-2 px-4 border border-white rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
         >
           Ver resultados
         </Link>
