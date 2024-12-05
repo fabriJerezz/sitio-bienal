@@ -23,6 +23,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
   // FormMessage,
 } from '@/components/ui/form';
 import Link from 'next/link';
@@ -143,11 +144,11 @@ export function LoginDropdownMenu() {
                     <FormItem>
                       <FormLabel className="flex items-center">
                         <User className="mr-2 h-4 w-4" />
-                        Usuario o Email
+                        Usuario
                       </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Ingresá tu usuario o email"
+                          placeholder="Ingresá tu usuario"
                           {...field}
                           className="text-sm bg-black/55 text-white border-white/20"
                         />
@@ -196,30 +197,94 @@ export function LoginDropdownMenu() {
                   {errorMessage}
                 </div>
               )}
-                {resetPasswordForm.formState.errors.email && (
-                  <div className="text-red-500 text-sm text-left mb-2">
-                    {resetPasswordForm.formState.errors.email.message}
-                  </div>
-                )}
-              <FormField
-                control={resetPasswordForm.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="flex items-center">
-                      <User className="mr-2 h-4 w-4" />
-                      Email
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter your email"
-                        {...field}
-                        className="text-sm bg-black/55 text-white border-white/20"
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+
+                    {isResetPassword ? (
+                      <Form {...resetPasswordForm}>
+                        <form onSubmit={resetPasswordForm.handleSubmit(onResetPasswordSubmit)}>
+                          <DropdownMenuGroup className="space-y-3 py-3">
+                            <FormField
+                              control={resetPasswordForm.control}
+                              name="email"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="flex items-center">
+                                    <User className="mr-2 h-4 w-4" />
+                                    Email
+                                  </FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder="Enter your email"
+                                      {...field}
+                                      className="text-sm bg-black text-white border-white/20"
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </DropdownMenuGroup>
+                        </form>
+                      </Form>
+                    ) : (
+                      <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)}>
+                          <DropdownMenuLabel className="text-center text-lg font-bold">Login</DropdownMenuLabel>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuGroup className="space-y-3 py-3">
+                            {errorMessage && (
+                              <div className="text-red-500 text-sm text-center mb-2">
+                                {errorMessage}
+                              </div>
+                            )}
+                            <FormField
+                              control={form.control}
+                              name="username"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="flex items-center">
+                                    <User className="mr-2 h-4 w-4" />
+                                    Usuario 
+                                  </FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      placeholder="Ingresá tu usuario"
+                                      {...field}
+                                      className="text-sm bg-black text-white border-white/20"
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <FormField
+                              control={form.control}
+                              name="password"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="flex items-center">
+                                    <Lock className="mr-2 h-4 w-4" />
+                                    Password
+                                  </FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      type="password"
+                                      placeholder="Enter your password"
+                                      {...field}
+                                      className="text-sm bg-black text-white border-white/20"
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <Button type="submit" className="w-full text-sm py-1 bg-white text-black hover:bg-white/90">
+                              Login
+                            </Button>
+                          </DropdownMenuGroup>
+                        </form>
+                      </Form>
+                    )}
+
               <Button type="submit" className="w-full text-sm py-1 bg-white/70 bg-opacity-85 text-black hover:bg-white">
                 Restablecer contraseña
               </Button>
@@ -253,7 +318,7 @@ export function LoginDropdownMenu() {
                     e.preventDefault();
                     setIsResetPassword(true);
                     setErrorMessage(null);
-                    resetPasswordForm.reset({ email: '' });
+                    resetPasswordForm.reset();
                   }}
                 >
                   <Lock className="mr-2 h-3.5 w-3.5" />
