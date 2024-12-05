@@ -68,18 +68,18 @@ export function FocusCardsDemo() {
         <div className="relative">
           <FocusCards cards={cards} />
         </div>
-        <div className="flex justify-center mt-5 space-x-6 pt-20 pb-20">
+        <div className="flex justify-center mt-5 space-x pt-20 pb-20">
           <button
             onClick={handlePrevPage}
-            disabled={!prevPage} // Deshabilita el botón si no hay una página anterior
-            className="px-8 py-3 bg-gradient-to-r from-[#fcbe5a] to-[#f9ad21] text-black rounded-full hover:from-[#f9ad21] hover:to-[#ff8229] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
+            disabled={!prevPage}
+            className="px-8 py-3 bg-gradient-to-r from-white to-black text-white rounded-full hover:from-gray-300 hover:to-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
           >
             Anterior
           </button>
           <button
             onClick={handleNextPage}
-            disabled={!nextPage} // Deshabilita el botón si no hay una página anterior
-            className="px-8 py-3 bg-gradient-to-r from-[#fcbe5a] to-[#f9ad21] text-black rounded-full hover:from-[#ff8229] hover:to-[#ff8229] focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
+            disabled={!nextPage}
+            className="px-8 py-3 bg-gradient-to-r from-white to-black text-white rounded-full hover:from-gray-300 hover:to-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl"
           >
             Siguiente
           </button>
