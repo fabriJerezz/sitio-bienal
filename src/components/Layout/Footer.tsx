@@ -2,7 +2,7 @@ import { Phone, Mail, Globe, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#cfc9c4] text-gray-800">
+    <footer className="w-full bg-[#f5f4f2] text-gray-950">
       <div className="max-w-6xl mx-auto p-6 flex justify-between items-stretch">
         <div className="flex-1 space-y-2">
           <div className="font-bold">
@@ -14,35 +14,25 @@ const Footer = () => {
           </p>
         </div>
         <div className="w-px bg-gray-600 mx-8 ml-40"></div>
-        <div className="flex-1 space-y-2 text-lg mt-2">
+        <div className="flex-1 space-y-2 text-lg mt-8">
           <div className="flex items-center gap-3">
             <Phone className="w-6 h-6" />
-            <span>123-456-7890</span>
+            <span>+54 362-425-1861</span>
           </div>
           <div className="flex items-center gap-3">
             <Mail className="w-6 h-6" />
             <a
-              href="mailto:aurora@reallygreatsite.com"
+              href="mailto:bienalchaco@gmail.com"
               className="hover:underline"
             >
-              aurora@reallygreatsite.com
-            </a>
-          </div>
-          <div className="flex items-center gap-3">
-            <Globe className="w-6 h-6" />
-            <a
-              href="https://www.reallygreatsite.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline"
-            >
-              www.reallygreatsite.com
+              bienalchaco@gmail.com
             </a>
           </div>
           <div className="flex items-center gap-3">
             <MapPin className="w-6 h-6" />
-            <span>123 Anywhere St., Any City</span>
+            <span>Avenida de los Inmigrantes 1001</span>
           </div>
+          
         </div>
       </div>
     </footer>
