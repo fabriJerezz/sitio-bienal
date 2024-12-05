@@ -49,6 +49,7 @@ export function LoginDropdownMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isResetPassword, setIsResetPassword] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -82,8 +83,11 @@ export function LoginDropdownMenu() {
   const onResetPasswordSubmit = async (values: ResetPasswordFormValues) => {
     try {
       console.log('email', values.email);
-      await userService.resetPassword(values.email);
-      setIsResetPassword(false);
+      await userService.requestResetPassword(values.email);
+      setSuccessMessage('Correo enviado con éxito!');
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 3000);
       // Keep the dropdown open
       setIsOpen(true);
       // Reset the email field to be empty
@@ -202,6 +206,11 @@ export function LoginDropdownMenu() {
                       <Form {...resetPasswordForm}>
                         <form onSubmit={resetPasswordForm.handleSubmit(onResetPasswordSubmit)}>
                           <DropdownMenuGroup className="space-y-3 py-3">
+                            {successMessage && (
+                              <div className="text-green-500 text-sm text-left mb-2">
+                                {successMessage}
+                              </div>
+                            )}
                             <FormField
                               control={resetPasswordForm.control}
                               name="email"
