@@ -105,6 +105,20 @@ const Page = () => {
                 alt="Error Gif"
               />
             </>
+          ) : error === 'Votacion finalizada' ? (
+            <>
+              <h1 className="text-3xl">
+                No puede votar en eventos ya finalizados o en eventos por
+                iniciar
+              </h1>
+              <p>Recuerde solo puede votar en eventos en curso</p>
+              <Image
+                src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGdmbjZqeXVseXNpbDZ3ZmN3b3UwamgwcG1jeXZoNTcyZGoxYzhnOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YTzh3zw4mj1XpjjiIb/giphy.webp"
+                width={200}
+                height={200}
+                alt="Error Gif"
+              />
+            </>
           ) : (
             <>
               <h1 className="text-3xl">
