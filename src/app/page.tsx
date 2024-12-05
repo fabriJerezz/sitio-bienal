@@ -7,10 +7,10 @@ import WebScrapping from '@/components/Home/WebScrapping';
 
 export default function Home() {
   return (
-    <>
+    <div className="bg-black">
       <Header />
       <WebScrapping />
       <Gallery />
-    </>
+    </div>
   );
 }

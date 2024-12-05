@@ -20,7 +20,7 @@ interface AuctionCardProps {
 
 export default function AuctionCard({ auction }: AuctionCardProps) {
   return (
-    <Card className="w-[350px] flex flex-col h-full overflow-hidden">
+    <Card className="w-[350px] flex flex-col h-full overflow-hidden text-white">
       <Image
         src={auction.image}
         alt={`Image of ${auction.title}`}
@@ -39,7 +39,7 @@ export default function AuctionCard({ auction }: AuctionCardProps) {
           </CardDescription>
         </CardHeader>
         <CardContent className="flex-grow">
-          <div className="flex items-center space-x-2 text-lg font-semibold text-primary">
+          <div className="flex items-center space-x-2 text-lg font-semibold text-primary text-white">
             <DollarSign className="h-5 w-5" />
             <span>{auction.price}</span>
           </div>

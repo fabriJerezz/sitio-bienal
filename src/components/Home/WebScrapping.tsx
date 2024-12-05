@@ -65,15 +65,15 @@ function WebScrapping() {
       <h1 className="text-white text-6xl w-full text-center mb-6 mt-6">
         Ultimas Noticias
       </h1>
-      <div className="w-full flex justify-center bg-white text-black pt-10 pb-10 ">
+      <div className="w-full flex justify-center bg-black text-black pt-10 pb-10 ">
         <GralCarousel array={news} />
       </div>
       <h1 className="text-white text-6xl w-full  mb-6 mt-6">Subastas</h1>
-      <div className="w-full flex justify-center bg-white text-black pt-10 pb-10 ">
+      <div className="w-full flex justify-center bg-black text-black pt-10 pb-10 ">
         <GralCarousel array={auctions} />
       </div>
       <h1 className="text-white text-6xl w-full  mb-6 mt-6">Artistas</h1>
-      <div className="w-full flex justify-center bg-white text-black pt-10 pb-10 ">
+      <div className="w-full flex justify-center bg-black text-black pt-10 pb-10 ">
         <GralCarousel array={artirsts} />
       </div>
     </section>

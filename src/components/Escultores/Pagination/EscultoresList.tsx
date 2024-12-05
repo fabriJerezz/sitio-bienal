@@ -90,7 +90,7 @@ const EscultoresList: React.FC = () => {
               onClick={fetchMoreEvents}
               className="bg-white text-black p-2 rounded-md m-2"
             >
-              Ver mas
+              Ver más
             </button>
           )}
         </div>

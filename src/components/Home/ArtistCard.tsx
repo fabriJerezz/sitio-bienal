@@ -40,7 +40,7 @@ export default function ArtistCard({ artist }: ArtistCardProps) {
           </CardDescription>
         </CardHeader>
         <CardContent className="flex-grow">
-          <p className="text-sm text-muted-foreground line-clamp-3">
+          <p className="text-sm text-muted-foreground line-clamp-3 text-white">
             {artist.about}
           </p>
         </CardContent>
