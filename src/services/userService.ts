@@ -56,17 +56,21 @@ const userService = {
     }
   },
   resetPassword: async (email: string) => {
+    const url = "https://tp-final-bienal.onrender.com/password-reset/";
     try {
-      const response = await fetch(`https://tp-final-bienal.onrender.com/password-reset`, {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
+          // 'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: email }),
       });
       if (!response.ok) {
-        throw new Error('Failed to reset password');
+        // throw new Error('Failed to reset password');
+        console.log(response)
       }
+      console.log(response)
     } catch (error) {
       console.error('Error during password reset:', error);
       throw error;
