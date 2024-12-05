@@ -5,6 +5,7 @@ import useUserStore from '@/store/userStore';
 import { LoginDropdownMenu } from '@/components/Users/login-dropdown-menu';
 
 import { UserReturnedData } from '@/types';
+import ConfigurationIcon from '../ui/configurationIcon';
 
 const Navbar = () => {
   const user = useUserStore((state) => state.user);
@@ -37,34 +38,34 @@ const Navbar = () => {
     }
   }, [lastScrollY]);
 
-  useEffect(() => {
-    const background = document.getElementById('background');
-    if (background) {
-      const backgroundColor =
-        window.getComputedStyle(background).backgroundColor;
+  // useEffect(() => {
+  //   const background = document.getElementById('background');
+  //   if (background) {
+  //     const backgroundColor =
+  //       window.getComputedStyle(background).backgroundColor;
 
-      const rgbToHex = function (rgb: string) {
-        const result = rgb.match(/\d+/g)?.map(function (x: any) {
-          return parseInt(x).toString(16).padStart(2, '0');
-        });
-        return `#${result?.join('')}`;
-      };
+  //     const rgbToHex = function (rgb: string) {
+  //       const result = rgb.match(/\d+/g)?.map(function (x: any) {
+  //         return parseInt(x).toString(16).padStart(2, '0');
+  //       });
+  //       return `#${result?.join('')}`;
+  //     };
 
-      const hexColor = rgbToHex(backgroundColor);
+  //     const hexColor = rgbToHex(backgroundColor);
 
-      if (hexColor === '#000000') {
-        // Ejemplo: si el color de fondo es negro
-        setNavbarClass('navbar-dark');
-      } else {
-        setNavbarClass('navbar-default');
-      }
-    }
-  }, []);
+  //     if (hexColor === '#000000') {
+  //       // Ejemplo: si el color de fondo es negro
+  //       setNavbarClass('navbar-dark');
+  //     } else {
+  //       setNavbarClass('navbar-default');
+  //     }
+  //   }
+  // }, []);
 
   return (
     <div
       id="navbar"
-      className={`text-secondary w-screen z-50 flex items-center fixed py-3 transition-transform duration-300 ${navbarClass} ${
+      className={`text-secondary w-screen z-50 flex items-center fixed py-3 transition-transform duration-300  ${
         showNavbar ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
