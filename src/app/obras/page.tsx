@@ -58,7 +58,7 @@ export function FocusCardsDemo() {
 
   return (
     <>
-      <div className="bg-slate-900 relative ">
+      <div className="bg-black relative ">
         <header className="w-full pt-16 pb-5 flex justify-between px-20">
           <h1 className="text-white text-3xl ">
             <span className="font-bold">Nuestras</span> Piezas
@@ -68,7 +68,7 @@ export function FocusCardsDemo() {
         <div className="relative">
           <FocusCards cards={cards} />
         </div>
-        <div className="flex justify-center mt-5 space-x-6">
+        <div className="flex justify-center mt-5 space-x-6 pt-20 pb-20">
           <button
             onClick={handlePrevPage}
             disabled={!prevPage} // Deshabilita el botón si no hay una página anterior
