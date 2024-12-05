@@ -9,9 +9,8 @@ export default function Home() {
   return (
     <>
       <Header />
-      <SculptorsSection />
-      <Gallery />
       <WebScrapping />
+      <Gallery />
     </>
   );
 }

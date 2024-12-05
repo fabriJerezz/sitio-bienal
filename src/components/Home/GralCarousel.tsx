@@ -21,7 +21,7 @@ export function GralCarousel({ array }: GralCarouselProps) {
         align: 'start',
         loop: true,
       }}
-      className="w-3/4 "
+      className="w-3/4 bg-black p-4 rounded-lg"
     >
       <CarouselContent className="  flex ">
         {array.map((item, index) => (

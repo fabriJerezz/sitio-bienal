@@ -31,7 +31,7 @@ export default function ArtistCard({ artist }: ArtistCardProps) {
       </div>
       <div className="flex flex-col flex-grow">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-white/50">
+          <CardTitle className="text-2xl font-bold text-white">
             {artist.title}
           </CardTitle>
           <CardDescription className="flex items-center space-x-2 text-sm text-muted-foreground">
