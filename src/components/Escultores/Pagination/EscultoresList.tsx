@@ -1,7 +1,7 @@
 // components/EscultoresList.tsx
 'use client';
 import React, { useState, useEffect } from 'react';
-import FlipCards from '../../Escultores/flipCard';
+import FlipCards from '../flipCard';
 import { Escultura } from '@/components/Esculturas/paginationEsculturas';
 interface Escultor {
   id: number;
