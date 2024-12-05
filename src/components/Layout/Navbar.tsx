@@ -3,16 +3,18 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import useUserStore from '@/store/userStore';
 import { LoginDropdownMenu } from '@/components/Users/login-dropdown-menu';
-import ConfigurationIcon from '../ui/configurationIcon';
-import '@/../styles/global.css';
+
+import { UserReturnedData } from '@/types';
 
 const Navbar = () => {
+  const user = useUserStore((state) => state.user);
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [navbarClass, setNavbarClass] = useState('navbar-default');
-
-  const user = useUserStore.getState().user;
   const isAdmin = useMemo(() => user?.staff, [user]);
+
+
+
+ console.log(user)
 
   const controlNavbar = (): void => {
     if (typeof window !== 'undefined') {

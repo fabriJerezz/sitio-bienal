@@ -12,9 +12,6 @@ export default function Header() {
     password: 'elfrontend12',
   };
 
-  useEffect(() => {
-    login(newUser);
-  }, []);
 
   console.log(user);
   return (
@@ -35,12 +32,11 @@ export default function Header() {
             Donde el arte toma forma
           </h2>
         </header>
-        <div className="flex gap-10 justify-center items-center text-xl">
-          <Link href="/obras">
-            <button className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300">
-              Explorar obras
-            </button>
-          </Link>
+        <div className="flex md:gap-10 gap-7 mt-14  justify-center items-center text-xl flex-col md:flex-row">
+          <button className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300">
+            Explorar obras
+          </button>
+
           <Link
             href="/escultores"
             className="p-3 rounded-full border hover:bg-white hover:bg-opacity-50 transition duration-300"

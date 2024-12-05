@@ -25,6 +25,7 @@ const userService = {
         throw new Error('Failed to authenticate user');
       }
       const data = await response.json();
+      
       return keysToCamelCase(data) as UserReturnedData;
     } catch (error) {
       console.error('Error during authentication:', error);
@@ -54,6 +55,47 @@ const userService = {
       throw error;
     }
   },
+  requestResetPassword: async (email: string) => {
+    const url = "https://tp-final-bienal.onrender.com/password-reset/";
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          // 'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email }),
+      });
+      if (!response.ok) {
+        // throw new Error('Failed to reset password');
+        console.log(response)
+      }
+      console.log(response)
+    } catch (error) {
+      console.error('Error during password reset:', error);
+      throw error;
+    }
+  },
+  resetPassword: async (token: string, password: string) => {
+    const url = `https://tp-final-bienal.onrender.com/password-reset-confirm/`;
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token, new_password: password}),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to reset password');
+      }
+      return response.json();
+    } catch (error) {
+      console.error('Error during password reset:', error);
+      throw error;
+    }
+  },
 };
 
 export default userService;
+          

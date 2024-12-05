@@ -25,6 +25,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import userService from '@/services/userService';
 import { UserRegistration } from '@/types';
 import { useRouter } from 'next/navigation';
+import keysToSnakeCase from '@/utils/toSnakeCase';
+
 
 const countries = [
   { code: 'AR', name: 'Argentina', flag: '🇦🇷' },
@@ -61,6 +63,7 @@ const formSchema = z
 export function RegisterFormComponent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [infoMessage, setInfoMessage] = useState('');
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -90,8 +93,10 @@ export function RegisterFormComponent() {
         birthdate: values.birthdate,
       },
     };
+    const snakeCaseUser = keysToSnakeCase(finalUserObject);
+    console.log(snakeCaseUser);
     try {
-      await userService.registerUser(finalUserObject as UserRegistration);
+      await userService.registerUser(snakeCaseUser as UserRegistration);
       form.reset();
       setSuccessMessage('Usuario registrado con éxito!');
       setTimeout(() => {
@@ -104,6 +109,9 @@ export function RegisterFormComponent() {
       }, 3500);
     } catch (error) {
       console.error('Error during registration:', error);
+      setErrorMessage('Error al registrar usuario');
+      setIsSubmitting(false);
+      form.reset();
     }
   }
 
@@ -115,16 +123,11 @@ export function RegisterFormComponent() {
             Sing Up Account
           </CardTitle>
         </CardHeader>
-        {successMessage && (
-          <p className="text-green-500 text-opacity-85 mb-4 text-start ml-6">
-            {successMessage}
-          </p>
-        )}
-        {infoMessage && (
-          <p className="text-blue-800 text-opacity-75 mb-4 text-start ml-6">
-            {infoMessage}
-          </p>
-        )}
+
+        {successMessage && <p className="text-green-500 text-opacity-85 mb-4 text-start ml-6">{successMessage}</p>}
+        {infoMessage && <p className="text-blue-800 text-opacity-75 mb-4 text-start ml-6">{infoMessage}</p>}
+        {errorMessage && <p className="text-red-500 text-opacity-85 mb-4 text-start ml-6">{errorMessage}</p>}
+        
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
