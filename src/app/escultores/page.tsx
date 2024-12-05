@@ -1,6 +1,6 @@
 import React from 'react';
 import SculptorsHeader from '../../components/Escultores/SculptorsHeader';
-import EscultoresList from '../../components/Escultores/Pagination/PaginationSculptors';
+import EscultoresList from '../../components/Escultores/Pagination/EscultoresList';
 
 function Page() {
   return (
