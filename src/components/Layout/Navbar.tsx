@@ -14,9 +14,6 @@ const Navbar = () => {
   const isAdmin = useMemo(() => user?.staff, [user]);
 
 
-
- console.log(user)
-
   const controlNavbar = (): void => {
     if (typeof window !== 'undefined') {
       if (window.scrollY > lastScrollY) {
