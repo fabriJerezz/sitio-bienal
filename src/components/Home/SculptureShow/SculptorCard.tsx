@@ -2,7 +2,7 @@
 import React from 'react';
 
 import Image from 'next/image';
-import esc from '../../../../public/imgs/esc1.jpg';
+
 import { getCountryCode } from '../../lib/getCountryCode';
 
 interface CardInfoProps {
@@ -41,8 +41,10 @@ export default function CardInfo({
         <div className="relative w-full h-full">
           <Image
             alt="Descripción de la imagen"
-            src={esc}
+            src={img}
             className="w-full h-full rounded-xl transform transition-transform hover:scale-105 cursor-pointer"
+            width={300}
+            height={300}
           ></Image>
         </div>
         <h2 className="text-3xl font-bold  text-white mt-2 relative">
