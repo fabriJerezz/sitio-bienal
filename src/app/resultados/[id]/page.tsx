@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 
 export default function Page() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
+  const [mostVoted, setMostVoted] = useState(null);
 
   const { id } = useParams();
 
@@ -15,9 +16,19 @@ export default function Page() {
           `https://tp-final-bienal.onrender.com/api/resultados/${id}/`
         );
 
-        const data = await response.json();
-        setData(data);
-        console.log(data.detail);
+        const jsonData = await response.json();
+        const transformedData = Object.keys(jsonData).map((key) => ({
+          name: key,
+          total_votos: jsonData[key].total_votos,
+        }));
+        setData(transformedData);
+
+        if (transformedData.length > 0) {
+          const maxVoted = transformedData.reduce((prev, current) =>
+            prev.total_votos > current.total_votos ? prev : current
+          );
+          setMostVoted(maxVoted);
+        }
       } catch (error) {
         console.error('Error al obtener datos:', error);
       }
@@ -26,12 +37,8 @@ export default function Page() {
     fetchData();
   }, [id]);
 
-  const values = [];
-  const labels = [];
-  for (const key in data) {
-    labels.push(key);
-    values.push(data[key].total_votos);
-  }
+  const values = data.map((item) => item.total_votos);
+  const labels = data.map((item) => item.name);
 
   const graphData = [
     {
@@ -57,17 +64,28 @@ export default function Page() {
       <h1 className="text-3xl font-extrabold text-white mb-6">
         Resultados del evento
       </h1>
-      <div className="  w-1/2 bg-white shadow-lg rounded-lg p-4 object-cover">
-        {data.detail === 'No hay votaciones para este evento' ? (
+      <div className="w-1/2 bg-white shadow-lg rounded-lg p-4 object-cover">
+        {data.length === 0 ? (
           <p className="text-center text-red-500">
             No hay votaciones para este evento
           </p>
         ) : (
-          <Plot
-            data={graphData}
-            layout={layout}
-            config={{ responsive: true }}
-          />
+          <>
+            <Plot
+              data={graphData}
+              layout={layout}
+              config={{ responsive: true }}
+            />
+            <p className="text-center text-black text-2xl">
+              Total de votos: {values.reduce((a, b) => a + b, 0)}
+            </p>
+            {mostVoted && (
+              <h2 className="text-center text-black text-xl">
+                Obra más votada: "{mostVoted.name}" con{' '}
+                <span>{mostVoted.total_votos} puntos de votación</span>
+              </h2>
+            )}
+          </>
         )}
       </div>
     </div>

@@ -115,7 +115,8 @@ Card.displayName = 'Card';
 type Card = {
   id: string;
   title: string;
-  src: string;
+  src: string | null | File;
+  description: string;
 };
 
 export function FocusCards({ cards }: { cards: Card[] }) {

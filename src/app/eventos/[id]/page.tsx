@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Piece, Event } from '@/types';
 import { FocusCards } from '@/components/Obras/FocusCard';
 import DownArrow from '@/components/ui/DownArrow';
+import Link from 'next/link';
 
 const EventoDetalle = () => {
   const { id } = useParams(); // Captura el parámetro dinámico
@@ -93,9 +94,17 @@ const EventoDetalle = () => {
             </>
           )}
           {Event?.evento_en_transcurso === 'Finalizado' && (
-            <div className="text-4xl text-red-500 font-semibold">
-              El evento ha finalizado
-            </div>
+            <>
+              <div className="text-4xl text-red-500 font-semibold">
+                El evento ha finalizado
+              </div>
+              <Link
+                href={`../resultados/${Event?.id}`}
+                className="text-white hover:text-black hover:bg-white font-semibold py-2 px-4 border border-white rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+              >
+                Ver resultados
+              </Link>
+            </>
           )}
           {Event?.evento_en_transcurso === 'Por iniciar' && (
             <div className="text-4xl text-black font-semibold">
